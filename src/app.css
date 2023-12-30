@@ -41,7 +41,7 @@ p.balance {
 }
 
 hr {
-	@apply border-none h-1 bg-gradient-to-r from-pastel-beige to-pastel-blue my-8;
+	@apply border-none h-1 bg-border my-8;
 }
 
 a.link {
@@ -129,9 +129,14 @@ pre[class*="language-"] {
   font-variant-ligatures: normal;
   direction: ltr;
   text-align: left;
-  white-space: pre;
   word-spacing: normal;
   word-break: normal;
+  text-wrap: wrap;
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
   line-height: 1.5;
   -moz-tab-size: 2;
   -o-tab-size: 2;

@@ -113,7 +113,7 @@
           <div class="p-4">
             {#each $page.data.topLanguages as language}
               <a
-                href="/categories/{language}"
+                href="/languages/{language}"
                 class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
               >
                 <div
@@ -135,7 +135,7 @@
           </div>
           <div class="flex flex-row">
             <a
-              href="/categories"
+              href="/languages"
               class="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-black-primary bg-gray-100 transition-all group hover:bg-border w-full"
             >
               <svg
@@ -293,7 +293,7 @@
               >
                 {#each $page.data.topLanguages as language}
                   <a
-                    href="/categories/{language}"
+                    href="/languages/{language}"
                     class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-black-primary hover:bg-gray-50"
                     >{language}</a
                   >

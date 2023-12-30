@@ -14,12 +14,10 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero ipsam veritatis co
 ```js
 // This function logs all the arguments passes to it
 const test = (...args) => {
-    for(const arg in args) {
-        console.log(arg);
-    }
+    console.log(args);
 }
 
-test(1, "2", { o: 1, f: [ 1, 2, 2 ] }, [ "i", "j" ])
+test(1, "2", { o: 1, f: [ 1, 2, 2 ] }, [ "i", "j" ]) // [1, '2', {o: 1, f: [1, 2, 2]}, ['i', 'j']]
 ```
 
 

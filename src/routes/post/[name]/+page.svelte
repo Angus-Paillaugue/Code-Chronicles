@@ -4,6 +4,8 @@
   import { formatDate } from "$lib/utils";
   import { newToast } from "$lib/stores";
   import { replaceState } from "$app/navigation";
+  import { fly } from "svelte/transition";
+  import { quintOut } from "svelte/easing";
 
   const { data } = $props();
   const { post } = data;
@@ -20,18 +22,23 @@
   onMount(() => {
     if (article.querySelector("ul:first-child")) {
       // Add padding recursively to nested sections (ex: 1.1, 4.2.1, etc.)
-      article.querySelector("ul:first-child").querySelectorAll("ul").forEach((el) => {
-        el.classList.add("pl-6");
-      });
+      article
+        .querySelector("ul:first-child")
+        .querySelectorAll("ul")
+        .forEach((el) => {
+          el.classList.add("pl-6");
+        });
       // Clone the table of contents (TOC) and add it to the side TOC
       const toc = article.querySelector("ul:first-child").cloneNode(true);
       // Add classes to the cloned TOC
-      toc.classList.add("pl-12", "transition-all");
+      toc.classList.add("pl-12", "transition-all", "space-y-2");
       // Add styling to the side TOC items
+      toc.querySelectorAll("li").forEach((el) => {
+        el.classList.add("m-0");
+      });
       toc.querySelectorAll("li>a").forEach((el) => {
         el.classList.add(
           "m-0",
-          "mb-2",
           "no-underline",
           "cursor-pointer",
           "transition-all",
@@ -42,7 +49,7 @@
       sideTOC.appendChild(toc);
       // Hide the main TOC greater than small screens
       article.querySelector("ul:first-child").classList.add("lg:hidden");
-    }else {
+    } else {
       // Remove the side TOC if there is no TOC
       sideTOC.remove();
     }
@@ -103,21 +110,22 @@
 
     onscroll = () => {
       scrollPos = window.scrollY + 96 + scrollOffset;
-      const sections = Array.from(article.querySelectorAll("h1,h2,h3,h4,h5,h6"));
+      const sections = Array.from(
+        article.querySelectorAll("h1,h2,h3,h4,h5,h6")
+      );
 
       for (let i in sections) {
         const section = sections[i];
         const rect = section.getBoundingClientRect();
         const top = rect.top + window.scrollY;
         if (top <= scrollPos) {
-          sideTOC
-            .querySelectorAll("ul>li>a")
-            .forEach(el => {
-              el.classList.remove('underline');
-              el.classList.add('no-underline');
-            });
-          const activeSectionLink = sideTOC
-            .querySelector(`a[href='#${section.id}']`);
+          sideTOC.querySelectorAll("ul>li>a").forEach((el) => {
+            el.classList.remove("underline");
+            el.classList.add("no-underline");
+          });
+          const activeSectionLink = sideTOC.querySelector(
+            `a[href='#${section.id}']`
+          );
 
           activeSectionLink.classList.remove("no-underline");
           activeSectionLink.classList.add("underline");
@@ -136,7 +144,7 @@
   $effect(() => {
     if (article.querySelector("ul:first-child")) {
       const toc = sideTOC.querySelector("ul");
-      if(sideTOCHidden) {
+      if (sideTOCHidden) {
         toc.classList.add("pl-12");
       } else {
         toc.classList.remove("pl-12");
@@ -154,60 +162,58 @@
 
 <!-- Back To Top Button -->
 
-<button
-  class="fixed bottom-2 right-2 md:bottom-4 md:right-4 w-10 h-10 z-10 rounded-full flex flex-col items-center justify-center transition bg-black-primary text-white hover:scale-105 active:scale-90 {scrollPos >
-  screenHeight
-    ? 'translate-y-0 opacity-100'
-    : '-translate-y-3 opacity-0'}"
-  on:click={() => {
-    replaceState(window.location.href.split("#")[0]);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }}
-  name="backToTop"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="2"
-    stroke="currentColor"
-    class="w-6 h-6"
+{#if scrollPos > screenHeight}
+  <button
+    class="fixed bottom-2 right-2 md:bottom-4 md:right-4 w-10 h-10 z-10 rounded-full flex flex-col items-center justify-center transition bg-black-primary text-white hover:scale-105 active:scale-90"
+    transition:fly={{ y: 20, duration: 150, easing: quintOut }}
+    on:click={() => {
+      replaceState(window.location.href.split("#")[0]);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }}
+    name="backToTop"
   >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"
-    />
-  </svg>
-</button>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+      class="w-6 h-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"
+      />
+    </svg>
+  </button>
 
-<!-- Reading Progress Bar -->
+  <!-- Reading Progress Bar -->
 
-<div
-  class="fixed top-20 left-0 right-0 {articleHeight > 0 &&
-  scrollPos - screenHeight < 0
-    ? 'h-0'
-    : 'h-2'} transition-all z-10 bg-white border-t border-border"
->
   <div
-    class="bg-black-primary h-full"
-    style="width: {articleHeight > 0
-      ? ((scrollPos - screenHeight < 0 ? 0 : scrollPos - screenHeight) /
-          (articleHeight - screenHeight)) *
-        100
-      : 0}%"
-  ></div>
-</div>
+    class="fixed top-20 z-10 left-0 h-2 right-0 bg-white border-t border-border"
+    transition:fly={{ y: "100%", duration: 150, easing: quintOut }}
+  >
+    <div
+      class="bg-black-primary h-full"
+      style="width: {articleHeight > 0
+        ? ((scrollPos - screenHeight < 0 ? 0 : scrollPos - screenHeight) /
+            (articleHeight - screenHeight)) *
+          100
+        : 0}%"
+    ></div>
+  </div>
+{/if}
 
 <!-- Side Table Of Contents (TOC) -->
 
 <div
-  class="fixed top-1/2 -translate-y-1/2 right-0 z-10 rounded-l-3xl bg-white border border-border border-r-0 p-2 md:p-4 transition-all w-[275px] {(
+  class="fixed top-1/2 -translate-y-1/2 right-0 z-10 rounded-l-3xl bg-white border border-border border-r-0 p-2 md:p-4 transition-all {(
     scrollPos - screenHeight < 0 ? 0 : scrollPos - screenHeight
   )
     ? sideTOCHidden
       ? 'translate-x-full mr-12 md:mr-14 lg:mr-16'
-      : 'translate-x-0'
+      : 'translate-x-0 max-w-[275px]'
     : 'translate-x-full'} max-lg:translate-x-full"
   bind:this={sideTOC}
 >
@@ -263,7 +269,8 @@
       style="grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));"
     >
       {#each post.languages as language}
-        <a href="/categories/{language}"
+        <a
+          href="/languages/{language}"
           data-tooltip={language}
           class="tech-stack"
           data-flip-id="post-tech-stack-{post.title.split(' ').join('-') +
