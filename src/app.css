@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900;1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	scroll-behavior: smooth;
+	box-sizing: border-box
+}
+
+html {
+  scroll-padding-top: 6rem;
+  @apply font-sans;
+}
+body {
+  @apply bg-repeat-y bg-center font-['Mulish'];
+}
+
+/* Text */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+  @apply font-['Poppins'];
+}
+h1 {
+  @apply font-medium md:font-semibold text-5xl md:text-6xl leading-[3.5rem] md:leading-[4rem] mb-4;
+}
+h2 {
+  @apply font-bold text-lg leading-6 mb-3;
+}
+h6 {
+  @apply font-semibold text-base leading-5 mb-3;
+}
+p, li {
+  @apply font-['Mulish'] text-lg font-medium leading-6 mb-4;
+}
+p.balance {
+  text-wrap: balance;
+}
+
+hr {
+	@apply border-none h-1 bg-gradient-to-r from-pastel-beige to-pastel-blue my-8;
+}
+
+a.link {
+  @apply underline font-bold hover:no-underline transition-all cursor-pointer;
+}
+
+::-webkit-scrollbar {
+	@apply w-2 h-2
+}
+::-webkit-scrollbar-track {
+	@apply bg-neutral-300
+}
+::-webkit-scrollbar-thumb {
+	@apply rounded-full bg-neutral-400
+}
+::-webkit-scrollbar-thumb:hover {
+	@apply bg-neutral-500
+}
+
+/* Tooltip */
+[data-tooltip]{
+	@apply cursor-pointer relative inline-block after:content-[attr(data-tooltip)] after:absolute after:shadow-lg after:opacity-0 after:transition-all after:ease-in-out after:pointer-events-none hover:after:opacity-100 after:z-30 focus:after:opacity-100 focus:after:z-30 after:p-3 after:rounded-md after:max-w-[300px] after:break-words after:h-auto after:bg-black-primary dark:after:bg-neutral-700 after:text-sm after:leading-4 after:-translate-x-1/2 after:bottom-full after:top-auto after:left-1/2 after:mb-2 after:translate-y-4 hover:after:-translate-y-0 focus:after:-translate-y-0 after:text-white after:dark:text-black-primary after:font-medium;
+}
+.tooltip-small {
+  @apply after:p-2 after:rounded after:max-w-[200px] after:text-xs after:leading-3;
+}
+/* Left */
+.tooltip-left {
+	@apply after:-translate-y-1/2 after:-translate-x-full after:top-1/2 after:bottom-auto hover:after:-left-2 after:right-auto after:mb-0 hover:after:-translate-y-1/2 focus:after:-translate-y-1/2;
+}
+/* Bottom */
+.tooltip-bottom {
+	@apply after:top-full after:left-1/2 after:bottom-auto after:right-auto after:-translate-y-4 hover:after:translate-y-0 focus:after:translate-y-0 after:mb-0;
+}
+/* Right */
+.tooltip-right {
+	@apply after:-translate-y-1/2 after:translate-x-1/2 after:top-1/2 after:bottom-auto hover:after:mr-2 after:mr-0 after:right-auto after:mb-0 hover:after:-translate-y-1/2 focus:after:-translate-y-1/2;
+}
+
+
+
+/* Posts CSS */
+
+h1.article-heading {
+  @apply text-4xl font-bold mb-6;
+}
+h2.article-heading {
+  @apply text-3xl font-bold mb-6;
+}
+h3.article-heading {
+  @apply text-2xl font-bold mb-6;
+}
+h4.article-heading {
+  @apply text-xl font-bold mb-6;
+}
+h5.article-heading {
+  @apply text-lg font-bold mb-6;
+}
+h6.article-heading {
+  @apply text-base font-bold mb-6;
+}
+p.article-text {
+  @apply mb-8 font-normal text-lg leading-8;
+}
+li.toc {
+	@apply my-1 font-normal text-lg leading-8 list-inside list-image-square;
+}
+
+pre {
+  @apply rounded-lg p-4 mb-4;
+}
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-ligatures: normal;
+  background-color: hsl(220, 13%, 18%);
+  color: hsl(220, 14%, 71%);
+  @apply rounded-lg px-1 py-0.5 text-sm;
+}
+code[class*="language-"],
+pre[class*="language-"] {
+  background: hsl(220, 13%, 18%);
+  color: hsl(220, 14%, 71%);
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-ligatures: normal;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+code[class*="language-"]::-moz-selection,
+pre[class*="language-"]::-moz-selection,
+code[class*="language-"] ::-moz-selection,
+pre[class*="language-"] ::-moz-selection {
+  background: hsl(220, 13%, 28%);
+  color: inherit;
+  text-shadow: none;
+}
+
+code[class*="language-"]::selection,
+pre[class*="language-"]::selection,
+code[class*="language-"] ::selection,
+pre[class*="language-"] ::selection {
+  background: hsl(220, 13%, 28%);
+  color: inherit;
+  text-shadow: none;
+}
+pre[class*="language-"] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+  border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"] {
+  padding: 0.2em 0.3em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
+
+@media print {
+  code[class*="language-"],
+  pre[class*="language-"] {
+      text-shadow: none;
+  }
+}
+
+.token.comment,
+.token.prolog,
+.token.cdata {
+  color: hsl(220, 10%, 40%);
+}
+
+.token.doctype,
+.token.punctuation,
+.token.entity {
+  color: hsl(220, 14%, 71%);
+}
+
+.token.attr-name,
+.token.class-name,
+.token.boolean,
+.token.constant,
+.token.number,
+.token.atrule {
+  color: hsl(29, 54%, 61%);
+}
+
+.token.keyword {
+  color: hsl(286, 60%, 67%);
+}
+
+.token.property,
+.token.tag,
+.token.symbol,
+.token.deleted,
+.token.important {
+  color: hsl(355, 65%, 65%);
+}
+
+.token.selector,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted,
+.token.regex,
+.token.attr-value,
+.token.attr-value > .token.punctuation {
+  color: hsl(95, 38%, 62%);
+}
+
+.token.variable,
+.token.operator,
+.token.function {
+  color: hsl(207, 82%, 66%);
+}
+
+.token.url {
+  color: hsl(187, 47%, 55%);
+}
+
+.token.attr-value > .token.punctuation.attr-equals,
+.token.special-attr > .token.attr-value > .token.value.css {
+  color: hsl(220, 14%, 71%);
+}
+
+.language-css .token.selector {
+  color: hsl(355, 65%, 65%);
+}
+
+.language-css .token.property {
+  color: hsl(220, 14%, 71%);
+}
+
+.language-css .token.function,
+.language-css .token.url > .token.function {
+  color: hsl(187, 47%, 55%);
+}
+
+.language-css .token.url > .token.string.url {
+  color: hsl(95, 38%, 62%);
+}
+
+.language-css .token.important,
+.language-css .token.atrule .token.rule {
+  color: hsl(286, 60%, 67%);
+}
+
+.language-javascript .token.operator {
+  color: hsl(286, 60%, 67%);
+}
+
+.language-javascript .token.template-string > .token.interpolation > .token.interpolation-punctuation.punctuation {
+  color: hsl(5, 48%, 51%);
+}
+
+.language-json .token.operator {
+  color: hsl(220, 14%, 71%);
+}
+
+.language-json .token.null.keyword {
+  color: hsl(29, 54%, 61%);
+}
+
+.language-markdown .token.url,
+.language-markdown .token.url > .token.operator,
+.language-markdown .token.url-reference.url > .token.string {
+  color: hsl(220, 14%, 71%);
+}
+
+.language-markdown .token.url > .token.content {
+  color: hsl(207, 82%, 66%);
+}
+
+.language-markdown .token.url > .token.url,
+.language-markdown .token.url-reference.url {
+  color: hsl(187, 47%, 55%);
+}
+
+.language-markdown .token.blockquote.punctuation,
+.language-markdown .token.hr.punctuation {
+  color: hsl(220, 10%, 40%);
+  font-style: italic;
+}
+
+.language-markdown .token.code-snippet {
+  color: hsl(95, 38%, 62%);
+}
+
+.language-markdown .token.bold .token.content {
+  color: hsl(29, 54%, 61%);
+}
+
+.language-markdown .token.italic .token.content {
+  color: hsl(286, 60%, 67%);
+}
+
+.language-markdown .token.strike .token.content,
+.language-markdown .token.strike .token.punctuation,
+.language-markdown .token.list.punctuation,
+.language-markdown .token.title.important > .token.punctuation {
+  color: hsl(355, 65%, 65%);
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.comment,
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.namespace {
+  opacity: 0.8;
+}
