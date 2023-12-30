@@ -32,6 +32,10 @@
     });
 </script>
 
+<svelte:head>
+    <title>Categories | Code Chronicle</title>
+</svelte:head>
+
 <div class="max-w-screen-xl mx-auto w-full p-2 md:p-4 lg:p-6">
     <Input placeholder="Search for languages" name="searchForLanguages" class="mb-6" bind:value={searchInputValue} />
     {#each Object.entries(posts) as [category, postsInCategory]}

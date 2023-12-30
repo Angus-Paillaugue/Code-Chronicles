@@ -11,6 +11,10 @@
     });
 </script>
 
+<svelte:head>
+    <title>{$page.url.searchParams.get("query")} | Code Chronicle</title>
+</svelte:head>
+
 <div class="max-w-screen-xl mx-auto w-full">
     {#if posts.length > 0}
         <h2 class="px-2 md:px-4 lg:px-6">Post matching "{$page.url.searchParams.get("query")}"</h2>
