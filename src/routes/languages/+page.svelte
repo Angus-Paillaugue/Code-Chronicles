@@ -1,15 +1,11 @@
 <script>
     import { Post } from "$lib/components/";
-    import Input from "../../lib/components/Input.svelte";
+    import Input from "$lib/components/Input.svelte";
     
     const { data } = $props();
     let posts = $state(data.posts);
     let searchInputValue = $state("");
     const theme = "light";
-
-    $effect(() => {
-        posts = data.posts;
-    });
 
     $effect(() => {
         const tolerance = 1;

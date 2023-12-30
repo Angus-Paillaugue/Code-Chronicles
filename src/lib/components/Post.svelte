@@ -1,5 +1,4 @@
 <script>
-  import languages from "$lib/languages.json";
   import { formatDate } from "$lib/utils";
   import LanguageIcon from "./LanguageIcon.svelte";
 

@@ -1,6 +1,6 @@
 <script>
   import { afterNavigate } from "$app/navigation";
-  import { onMount } from "svelte";
+  // import { onMount } from "svelte";
   import { fly } from "svelte/transition";
   import { quintOut } from "svelte/easing";
   import { Input, LanguageIcon } from "$lib/components/";
@@ -8,9 +8,9 @@
 
   let searchModal = $state(false);
   let recognition;
-  let searchInputValue = $state("");
+  // let searchInputValue = $state("");
   let lang;
-  let doesNotSupportSpeech = $state(false);
+  // let doesNotSupportSpeech = $state(false);
   let mobileNavBar = $state(false);
   let navbarDropdown = $state(false);
   const theme = "light";
@@ -22,15 +22,15 @@
     }, 150);
   });
 
-  onMount(() => {
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (SpeechRecognition) doesNotSupportSpeech = false;
-    else {
-      recognition = new SpeechRecognition();
-      lang = window.navigator.language;
-    }
-  });
+  // onMount(() => {
+  //   const SpeechRecognition =
+  //     window.SpeechRecognition || window.webkitSpeechRecognition;
+  //   if (SpeechRecognition) doesNotSupportSpeech = false;
+  //   else {
+  //     recognition = new SpeechRecognition();
+  //     lang = window.navigator.language;
+  //   }
+  // });
 
   afterNavigate(() => {
     searchModal = false;
@@ -38,19 +38,19 @@
     navbarDropdown = false;
   });
 
-  const handleInput = (event) => {
-    searchInputValue = event.target.value;
-  };
+  // const handleInput = (event) => {
+  //   searchInputValue = event.target.value;
+  // };
 
-  function handleVoiceBtn() {
-    recognition.continuous = true;
-    recognition.lang = lang;
-    recognition.start();
-    recognition.addEventListener("result", (event) => {
-      const transcript = event.results[event.resultIndex][0].transcript.trim();
-      searchInputValue = transcript;
-    });
-  }
+  // function handleVoiceBtn() {
+  //   recognition.continuous = true;
+  //   recognition.lang = lang;
+  //   recognition.start();
+  //   recognition.addEventListener("result", (event) => {
+  //     const transcript = event.results[event.resultIndex][0].transcript.trim();
+  //     searchInputValue = transcript;
+  //   });
+  // }
 </script>
 
 <div class="h-20"></div>
@@ -108,7 +108,7 @@
 
         <!-- Desktop dropdown -->
         <div
-          class="absolute -left-8 top-full w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg border border-border/5 transition-[transform,_opacity,_visibility] -z-10 opacity-0 translate-y-1 invisible peer-hover:z-40 peer-focus:z-40 hover:z-40 peer-hover:translate-y-0 peer-focus:translate-y-0 hover:translate-y-0 peer-hover:opacity-100 peer-focus:opacity-100 hover:opacity-100 peer-hover:visible peer-focus:visible hover:visible"
+          class="absolute -left-8 top-full w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg border border-border/5 transition-[transform,_opacity,_visibility] -z-10 opacity-0 translate-y-1 invisible peer-hover:z-40 peer-focus:z-40 hover:z-40 focus:z-40 peer-hover:translate-y-0 peer-focus:translate-y-0 focus:translate-y-0 hover:translate-y-0 peer-hover:opacity-100 peer-focus:opacity-100 focus:opacity-100 hover:opacity-100 peer-hover:visible peer-focus:visible hover:visible focus:visible"
         >
           <div class="p-4">
             {#each $page.data.topLanguages as language}
