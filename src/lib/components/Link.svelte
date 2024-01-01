@@ -10,7 +10,7 @@
         linkClasses
     );
 </script>
-    
+
 <a  {...restProps} {href} {target} class={finalClasses}>
     {@render children()}
 </a>

@@ -40,7 +40,9 @@ I'm not going to assume your knowledge and try to explain everything along the w
 
 **Writing Svelte feels like writing regular HTML, CSS, and JavaScript.**
 
-<Link href="https://svelte.dev">Svelte</Link> is a JavaScript framework created by <Link href="https://twitter.com/Rich_Harris">Rich Harris</Link> that aims to solve the problem of abundance of JavaScript on the web while delivering a delightful developer and user experience.
+<p>
+    <Link href="https://svelte.dev">Svelte</Link> is a JavaScript framework created by <Link href="https://twitter.com/Rich_Harris">Rich Harris</Link> that aims to solve the problem of abundance of JavaScript on the web while delivering a delightful developer and user experience.
+</p>
 
 Svelte is **compiled** meaning it's more of a language than a traditional JavaScript framework so it's not constrained by limitations of JavaScript. Because of that it can deliver the best **developer experience** and ship **less code** because the framework melts away when you ship code and you're only left with generated JavaScript. That's a couple of kilobytes compared to something like React that has to ship the entire runtime or library to work.
 

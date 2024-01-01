@@ -183,8 +183,10 @@
       const toc = sideTOC.querySelector("ol");
       if (sideTOCHidden) {
         toc.classList.add("pl-12");
+        sideTOCPillBg.style.left = `48px`;
       } else {
         toc.classList.remove("pl-12");
+        sideTOCPillBg.style.left = `-8px`;
       }
     }
   });
