@@ -1,9 +1,9 @@
 import { error } from '@sveltejs/kit';
-import { postsRef } from '$lib/server/db';
+import { postBySlug } from '$lib/server/posts';
 
 export const load = async ({ params }) => {
     const { name } = params;
-    const post = structuredClone(await postsRef.findOne({ fileName:name }));
+    const post = postBySlug(name);
     
     if (!post) throw error(404, 'Post not found');
     

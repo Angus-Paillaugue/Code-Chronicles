@@ -1,16 +1,14 @@
 <script>
-  import languages from "$lib/languages";
   import { onMount } from "svelte";
   import { formatDate } from "$lib/utils";
   import { newToast } from "$lib/stores";
   import { replaceState } from "$app/navigation";
   import { fly } from "svelte/transition";
   import { quintOut } from "svelte/easing";
+  import LanguageIcon from "$lib/components/LanguageIcon.svelte";
 
   const { data } = $props();
   const { post } = data;
-  const languagesRef = languages;
-  const theme = "light";
   const scrollOffset = 70;
   let article = $state();
   let scrollPos = $state(0);
@@ -277,12 +275,7 @@
             '-' +
             language}"
         >
-          <img
-            src="/icons/{languagesRef.filter((lang) => lang.name == language)[0]
-              .icons[theme]}"
-            class="rounded-md"
-            alt={language}
-          />
+          <LanguageIcon {language} />
         </a>
       {/each}
     </div>

@@ -6,7 +6,7 @@
 </script>
 
 <a
-  href="/post/{post.fileName}"
+  href="/post/{post.slug}"
   class="relative overflow-hidden rounded-lg shadow group"
 >
   <img

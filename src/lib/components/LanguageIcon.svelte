@@ -1,8 +1,11 @@
 <script>
-    import languages from "$lib/languages.json";
     import { twMerge } from "tailwind-merge";
+    import languages from '$lib/utils/languages.json';
 
-    const { language, theme, class:classes } = $props();
+    let { language, theme, class:classes } = $props();
+    theme ??= "light";
+
+    const icon = languages.find((lang) => lang.name == language)?.icons[theme] ?? "Javascript.svg";
 
     const iconsClasses = twMerge(
         "drop-shadow-md w-10 h-10",
@@ -11,10 +14,7 @@
 </script>
 
 <img
-    src="/icons/{languages.find((lang) => lang.name == language).icons[
-        theme
-    ]}"
+    src="/icons/{icon}"
     alt="{language} icon"
     class={iconsClasses}
-    
 />
