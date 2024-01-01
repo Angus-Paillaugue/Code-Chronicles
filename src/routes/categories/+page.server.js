@@ -1,7 +1,7 @@
-import { postsRef } from "$lib/server/db";
+import { allPosts } from "$lib/server/posts";
 
 export const load = async ({}) => {
-  let posts = await postsRef.find({}).project({ _id: 0 }).toArray();
+  let posts = allPosts();
 
   let postsByCategory = {};
   posts.forEach((post) => {

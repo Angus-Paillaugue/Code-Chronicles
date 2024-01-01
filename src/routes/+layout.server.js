@@ -1,9 +1,9 @@
-import { postsRef } from '$lib/server/db';
+import { allPosts } from '$lib/server/posts';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
-    const posts = await postsRef.find({  }).sort({ date:1 }).project({ _id:0 }).toArray();
-
+    const posts = await allPosts();
+    
     const allLanguages = posts.flatMap(obj => obj.languages);
     const languageCounts = new Map();
     allLanguages.forEach(language => {

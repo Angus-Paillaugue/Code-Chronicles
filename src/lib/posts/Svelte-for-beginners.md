@@ -1,3 +1,17 @@
+---
+title: Svelte for beginners
+description: Simple tutorial to learn the basics of the Svelte framework
+banner: /postsAssets/Svelte-for-beginners.avif
+date: '2023-06-21'
+languages:
+  - SvelteKit
+  - Svelte
+  - Javascript
+categories:
+  - front-end
+published: true
+---
+
 <script>
   import { Link } from "$lib/components";
 </script>

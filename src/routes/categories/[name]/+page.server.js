@@ -1,8 +1,8 @@
-import { postsRef } from '$lib/server/db';
+import { postsByCategory } from '$lib/server/posts';
 
 export const load = async ({ params }) => {
     const { name } = params;
-    const posts = await postsRef.find({ categories:{$in:[name]} }).project({ _id:0 }).toArray();
-    
+    const posts = await postsByCategory(name);
+
     return { posts };
 };

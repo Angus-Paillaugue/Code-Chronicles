@@ -16,8 +16,8 @@
 </svelte:head>
 
 <div class="max-w-screen-xl mx-auto w-full p-2 md:p-4 lg:p-6">
-    <h2>{$page.params.name} posts</h2>
     {#if posts.length > 0}
+        <h2>{$page.params.name} posts</h2>
         <div class="grid gap-4" style="grid-template-rows: min-content;grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));">
             {#each posts as post}
                 <Post {post} {theme}/>
