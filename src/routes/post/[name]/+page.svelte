@@ -16,6 +16,7 @@
   let screenHeight = $state(0);
   let sideTOC = $state();
   let sideTOCHidden = $state(false);
+  let sideTOCPillBg = $state();
 
   onMount(() => {
     if (article.querySelector("ol:first-child")) {
@@ -29,7 +30,14 @@
       // Clone the table of contents (TOC) and add it to the side TOC
       const toc = article.querySelector("ol:first-child").cloneNode(true);
       // Add classes to the cloned TOC
-      toc.classList.add("pl-12", "transition-all", "duration-500", "space-y-2", "list-decimal", "list-inside");
+      toc.classList.add(
+        "pl-12",
+        "transition-all",
+        "duration-500",
+        "space-y-2",
+        "list-decimal",
+        "list-inside"
+      );
       // Add styling to the side TOC items
       toc.querySelectorAll("li").forEach((el) => {
         el.classList.add("m-0");
@@ -44,7 +52,7 @@
         );
       });
       // Adds the side TOC to the DOM
-      sideTOC.appendChild(toc);
+      sideTOC.querySelector(".relative").appendChild(toc);
       // Hide the main TOC greater than small screens
       article.querySelector("ol:first-child").classList.add("lg:hidden");
     } else {
@@ -84,7 +92,7 @@
       }
       el.appendChild(lineNumberWrapper);
       // Adding padding to the code block to accommodate the line number column width
-      el.style.paddingLeft = `${12 + 12 * (noOfLines.toString().length)}px`;
+      el.style.paddingLeft = `${12 + 12 * noOfLines.toString().length}px`;
 
       // Creating copy code button
       const copyButton = document.createElement("button");
@@ -144,16 +152,18 @@
         const rect = section.getBoundingClientRect();
         const top = rect.top + window.scrollY;
         if (top <= scrollPos) {
-          sideTOC.querySelectorAll("ol>li>a").forEach((el) => {
-            el.classList.remove("underline");
-            el.classList.add("no-underline");
-          });
+          // sideTOC.querySelectorAll(".relative>ol>li>a").forEach((el) => {
+          //   el.classList.remove("underline");
+          //   el.classList.add("no-underline");
+          // });
           const activeSectionLink = sideTOC.querySelector(
             `a[href='#${section.id}']`
           );
 
-          activeSectionLink.classList.remove("no-underline");
-          activeSectionLink.classList.add("underline");
+          // activeSectionLink.classList.remove("no-underline");
+          // activeSectionLink.classList.add("underline");
+          sideTOCPillBg.style.top = `${activeSectionLink.parentElement.offsetTop - 4}px`;
+          sideTOCPillBg.style.width = `${activeSectionLink.offsetWidth + 8 * 2 + 24}px`;
         }
       }
     };
@@ -187,10 +197,7 @@
   <meta property="og:title" content={post.title} />
 </svelte:head>
 
-
 {#if scrollPos > screenHeight}
-
-
   <!-- Back To Top Button -->
 
   <button
@@ -217,7 +224,6 @@
       />
     </svg>
   </button>
-
 
   <!-- Reading Progress Bar -->
 
@@ -269,6 +275,9 @@
       />
     </svg>
   </button>
+  <div class="w-full h-full relative">
+    <span class="absolute -z-10 bg-border transition-all ease-linear -left-2 h-8 rounded-full" bind:this={sideTOCPillBg}></span>
+  </div>
 </div>
 
 <div class="max-w-[900px] mx-auto w-full mt-5">

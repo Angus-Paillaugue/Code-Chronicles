@@ -111,8 +111,12 @@ p.article-text + .article-heading {
 p.article-text:last-child {
   @apply mb-0;
 }
+/* TOC */
 li.toc {
-	@apply my-1 font-normal text-lg leading-8 list-inside list-decimal;
+	@apply my-1 font-bold text-lg leading-8 list-inside list-decimal;
+}
+ol:has(li.toc) {
+  @apply mb-8;
 }
 
 /* Others */
@@ -133,7 +137,7 @@ ul {
   @apply text-sm font-normal text-neutral-500 dark:text-neutral-400 select-none flex flex-col absolute top-0 leading-[1.5rem] px-2 py-4 left-0 bottom-0 pointer-events-none;
 }
 code {
-  @apply px-1 py-0.5 rounded-md text-base bg-neutral-800 text-gray-400 font-mono ligatures-normal text-shadow-code;
+  @apply px-1 py-0.5 rounded-md text-base bg-black-primary text-gray-400 font-mono ligatures-normal text-shadow-code;
 }
 code[class*="language-"],
 pre[class*="language-"] {
@@ -141,14 +145,14 @@ pre[class*="language-"] {
   -moz-tab-size: 2;
   -o-tab-size: 2;
   tab-size: 2;
-  @apply bg-neutral-800 text-gray-400 text-shadow-code font-mono ligatures-normal hyphens-none whitespace-pre-wrap leading-6 text-left text-wrap p-0;
+  @apply bg-neutral-800 text-gray-400 text-shadow-code font-mono ligatures-normal hyphens-none whitespace-pre-wrap text-left text-wrap p-0 max-md:text-sm leading-6 max-md:leading-6 max-md:whitespace-pre max-md:overflow-x-auto;
 }
+
 
 /* Add styling to code blocks */
 pre[class*="language-"] {
   @apply p-4 rounded-lg mb-4;
 }
-
 code[class*="language-"]::-moz-selection,
 pre[class*="language-"]::-moz-selection,
 code[class*="language-"] ::-moz-selection,
@@ -159,8 +163,6 @@ code[class*="language-"] ::selection,
 pre[class*="language-"] ::selection {
   @apply text-shadow-none;
 }
-
-
 /* Add or remove rounded to code blocks depending
    of if they have a title or not
 */
@@ -170,7 +172,6 @@ pre[class*="language-"] ::selection {
 .remark-code-title + pre[class*="language-"] {
   @apply rounded-t-none;
 }
-
 /* Printing page */
 @media print {
   code[class*="language-"],

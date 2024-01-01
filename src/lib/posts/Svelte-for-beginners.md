@@ -16,17 +16,17 @@ published: true
   import { Link } from "$lib/components";
 </script>
 
-- [Learning Svelte](#learning-svelte)
-- [What Is Svelte?](#what-is-svelte)
-- [The Single File Component](#the-single-file-component)
-- [Reactivity](#reactivity)
-- [Logic](#logic)
-- [Events](#events)
-- [Bindings](#bindings)
-- [Components](#components)
-- [Slots](#slots)
-- [Transitions](#transitions)
-- [Svelte Store](#svelte-store)
+1. [Learning Svelte](#learning-svelte)
+2. [What Is Svelte?](#what-is-svelte)
+3. [The Single File Component](#the-single-file-component)
+4. [Reactivity](#reactivity)
+5. [Logic](#logic)
+6. [Events](#events)
+7. [Bindings](#bindings)
+8. [Components](#components)
+9. [Slots](#slots)
+10. [Transitions](#transitions)
+11. [Svelte Store](#svelte-store)
 
 
 # Learning Svelte
@@ -52,7 +52,7 @@ Svelte is comparable to React and Vue for building single page applications wher
 
 To appreciate Svelte's simplicity we're going to start with a simple counter example using regular HTML and JavaScript. If you want to code along open a <Link href="https://codepen.io/pen/">new Codepen project</Link>.
 
-```html:Example.html
+```html :Example.html
 <p></p>
 <button onclick="increment()">Click</button>
 
@@ -83,7 +83,7 @@ I encourage you to **code along** and open the <Link href="https://svelte.dev/re
 
 This is the same example in Svelte.
 
-```svelte title='App.svelte'
+```svelte :App.svelte
 <script>
     let count = 0;
 
@@ -106,7 +106,7 @@ Inside the Svelte template you can use JavaScript **expressions** like `{count *
 
 Let's add some styles at the bottom of `App.svelte`.
 
-```html title='App.svelte'
+```html :App.svelte
 <style>
     p {
         color: teal;
@@ -132,7 +132,7 @@ When you're developing an application you want a change in your application stat
 Svelte's reactivity is based on **assignments**. To change state and trigger a re-render you assign a value to a variable you declared and it's going to update. We have already done this.
 
 
-```svelte title='App.svelte'
+```svelte :App.svelte
 <script>
 	let count = 0;
 
@@ -144,7 +144,7 @@ Svelte's reactivity is based on **assignments**. To change state and trigger a r
 
 Because we need to assign a value for Svelte to pick it up methods like `push` won't trigger an update until we reassign it. We can avoid doing the extra step by using the JavaScript spread operator `...` to keep existing items and add the new item.
 
-```svelte title='App.svelte'
+```svelte :App.svelte
 <script>
     let list = ['React', 'Vue'];
 
@@ -168,7 +168,7 @@ Svelte has **reactive declarations** using the `$:`` syntax which is valid <Link
 
 Using the `$:` syntax is saying “**re-run this code whenever any of the referenced values change**”.
 
-```svelte title='App.svelte'
+```svelte :App.svelte
 <script>
     // state
     let items = [1, 2, 3, 4];
@@ -187,7 +187,7 @@ Using the `$:` syntax is saying “**re-run this code whenever any of the refere
 
 **Think about it as giving Svelte dependencies to watch and rerun the code when the value changes** because in `$: albumLength = getAlbumLength(album)` on the right `album` is the referenced value.
 
-```svelte
+```svelte :App.svelte
 <script>
     // state
     let album = [
@@ -227,7 +227,7 @@ Using the `$:` syntax is saying “**re-run this code whenever any of the refere
 
 One of the cool things you can do is log a value whenever it changes so it's easy to see what's going on.
 
-```svelte
+```svelte :App.svelte
 <script>
     let count = 0;
     $: console.log(count);
@@ -238,7 +238,7 @@ One of the cool things you can do is log a value whenever it changes so it's eas
 
 You can have reactive blocks.
 
-```svelte
+```svelte :App.svelte
 <script>
     let count = 0;
 
@@ -260,7 +260,7 @@ Ignore the weird syntax highlighting because there isn't an extension for `.svel
 # Logic
 Since HTML can't express logic such as conditionals and loops you would have to write something like this using JavaScript.
 
-```html
+```html :Example.html
 <div id="app"></div>
 
 <script>
@@ -296,7 +296,7 @@ Since HTML can't express logic such as conditionals and loops you would have to 
 
 It doesn't look bad but I think we can do better. This is the same example using an `#if` block in Svelte.
 
-```svelte
+```svelte :App.svelte
 <script>
     let user = {
         loggedIn: false;
@@ -322,7 +322,7 @@ There's more logic blocks like `#if`, `#each`, `#await`, and `#key` for you to p
 
 This is using JavaScript to loop over a list of items and render them.
 
-```html
+```html :Example.html
 <div id="app"></div>
 
 <script>
@@ -354,7 +354,7 @@ This is using JavaScript to loop over a list of items and render them.
 
 The same example using `#each` in Svelte.
 
-```svelte
+```svelte :App.svelte
 <script>
     let todos = [
         { id: 1, text: 'Todo 1', completed: true },
@@ -376,7 +376,7 @@ The same example using `#each` in Svelte.
 
 You can <Link href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">destructure</Link> values from the item you're iterating over, get the index, and provide a key so Svelte can keep track of changes. **Avoid using the index as the key** because it's not guaranteed to be unique so use a unique value instead.
 
-```svelte
+```svelte :App.svelte
 <ul>
     {#each todos as {id, text, completed}, index (id)}
         <li>
@@ -390,7 +390,7 @@ You can <Link href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 If you're fetching data on the client this is how it would look using JavaScript.
 
-```html
+```html :Example.html
 <div id="app"></div>
 
 <script>
@@ -419,9 +419,10 @@ If you're fetching data on the client this is how it would look using JavaScript
     renderUI();
 </script>
 ```
+
 In Svelte you can easily resolve a promise using the `#await` block but you can also resolve the promise in the `<script>` tag if you want .
 
-```svelte
+```svelte :App.svelte
 <script>
     async function fetchPokemon(pokemonName) {
         let url = `https://pokeapi.co/api/v2/pokemon/`;
@@ -456,7 +457,7 @@ If you want to know about all the Svelte events you won't find them in the Svelt
 
 This is an example of an event listener in JavaScript.
 
-```html
+```html :Example.html
 <style>
     html,
     body {
@@ -493,7 +494,7 @@ This is an example of an event listener in JavaScript.
 
 In Svelte you use the `on:` directive to listen to DOM events.
 
-```svelte
+```svelte :App.svelte
 <script>
     let mouse = { x: 0, y: 0 };
 
@@ -518,7 +519,7 @@ Svelte sends the `event` alongside your function if you do `on:mousemove={handle
 
 Svelte has special modifiers for DOM events such as `preventDefault`. You can find a complete list under <Link href="https://svelte.dev/docs#Element_directives">element directives</Link> and you can chain special modifiers together.
 
-```svelte
+```svelte :App.svelte
 <script>
     function handleSubmit() {
         console.log('Submit');
@@ -544,7 +545,7 @@ You can implement data binding in JavaScript but it's not part of the language s
 
 Filtering a list of items using JavaScript.
 
-```html
+```html :Example.html
 <input type="text" />
 <ul></ul>
 
@@ -576,7 +577,7 @@ Filtering a list of items using JavaScript.
 
 Instead of using `event.target.value` which we could also do in Svelte we can bind the value of the text input field to `searchQuery` instead.
 
-```svelte
+```svelte :App.svelte
 <script>
  	let list = ['React', 'Vue', 'Svelte'];
     let filteredList = [];
@@ -623,7 +624,7 @@ The filename can be whatever but a capitalised tag such as `<Artist />` indicate
 
 Pretend that `artists` is some data we fetched as a JSON response from the Spotify API.
 
-```svelte
+```svelte :App.svelte
 <script>
 	import Artist from './Artist.svelte';
 	import Album from './Album.svelte';
@@ -661,7 +662,7 @@ Pretend that `artists` is some data we fetched as a JSON response from the Spoti
 ```
 The `<Artist />` component takes an `artistName` prop. To define something as a prop that's passed in to your component you use the `export let prop` syntax. You can define multiple props on the same line such as `export let prop1, prop2`.
 
-```svelte
+```svelte :Artist.svelte
 <script>
     export let artistName
 </script>
@@ -671,7 +672,7 @@ The `<Artist />` component takes an `artistName` prop. To define something as a 
 
 The `<Album />` component imports `<AlbumTrack />` and loops over the tracks. The `{...track}` syntax is just spreading the track props which is equivalent to `title={title} length={length}`. If your props share the same name as the value you can do `{title} {length}`.
 
-```svelte
+```svelte :Album.svelte
 <script>
     import AlbumTrack from './AlbumTrack.svelte';
 
@@ -698,7 +699,7 @@ We're passing `setPlaying` to the child component so we can set the currently pl
 
 The `<AlbumTrack />` component applies a .playing style using the `class:` directive based on what song is playing which is shorter than using a ternary inside an expression `class={playing === title ? 'playing' : ''}`.
 
-```svelte
+```svelte :AlbumTrack.svelte
 <script>
     export let setPlaying;
     export let playing;
@@ -721,7 +722,7 @@ The `<AlbumTrack />` component applies a .playing style using the `class:` direc
 
 We can also use a reactive statement `$: playing = playing === title` for `playing` and since it matches the class name we want to apply we can simplify the code and write `class:playing`.
 
-```svelte
+```svelte :AlbumTrack.svelte
 <script>
     export let setPlaying
     export let playing
@@ -747,7 +748,7 @@ We can also use a reactive statement `$: playing = playing === title` for `playi
 # Slots
 **In Svelte we can use slots to compose components** meaning our components can contain other components and elements to be more reusable like regular HTML.
 
-```html
+```html :Example.html
 <button>
 	<span>Child</span>
 </button>
@@ -755,7 +756,7 @@ We can also use a reactive statement `$: playing = playing === title` for `playi
 
 The `<slot>` element lets us do that with components. If you're familiar with React this is similar to the `children` prop and Vue also has slots. We can provide a **fallback** if no content is provided.
 
-```svelte
+```svelte :Button.svelte
 <button>
   <slot>Placeholder</slot>
 </button>
@@ -767,7 +768,7 @@ The `<slot>` element lets us do that with components. If you're familiar with Re
 </style>
 ```
 
-```svelte
+```svelte :App.svelte
 <script>
     import Button from './Button.svelte'
 </script>
@@ -781,14 +782,14 @@ The `<slot>` element lets us do that with components. If you're familiar with Re
 
 You can use **named slots** for more control over the placement of elements. If you want multiple elements going into the same slot use the `<svelte:fragment>` element as the wrapper.
 
-```svelte
+```svelte :Button.svelte
 <button>
     <slot name="icon"></slot>
     <slot name="text"></slot>
 </button>
 ```
 
-```svelte
+```svelte :App.svelte
 <script>
     import Button from './Button.svelte'
 </script>
@@ -807,7 +808,7 @@ You might be asking when you'd use slots over regular components and the answer 
 
 Here's an example of slots and composition used in a real-world scenario in <Link href="https://svelte-cubed.vercel.app/">Svelte Cubed</Link> that's a wrapper around <Link href="https://threejs.org/">Three.js</Link> so you write less code because it's more declarative:
 
-```svelte
+```svelte :Example.svelte
 <script>
     import * as SC from 'svelte-cubed';
     import * as THREE from 'three';
@@ -828,7 +829,7 @@ There's a lot more you can do with slot props but I encourage you to <Link href=
 
 To use a transition use `transition:fade`. You can specify parameters such as `delay`, `duration`, `easing` for `fade`. To learn what they are for each transition <Link href="https://svelte.dev/docs#svelte_transition">consult the documentation</Link>.
 
-```svelte
+```svelte :App.svelte
 <script>
     import { fade } from 'svelte/transition';
 
@@ -861,7 +862,7 @@ The Svelte store is just an object you can `subscribe` to for updates when the s
 
 (If you're trying this out in the Svelte REPL it's not obvious how to change the file extension but if you just type the file name such as `stores.js` it's going to change it.)
 
-```js
+```js :stores.js
 import { writable } from 'svelte/store';
 
 export let message = writable('Hello 👋');
@@ -869,7 +870,7 @@ export let message = writable('Hello 👋');
 
 You can use the reactive `$message` syntax to access the value. This also **subscribes and unsubscribes** to the store for you.
 
-```svelte
+```svelte :Alert.svelte
 <script>
     import { message } from './stores.js';
 
@@ -886,7 +887,7 @@ You can create your own stores by implementing the <Link href="https://svelte.de
 
 Here's an example of a writable local storage store you can use to set and update a value in local storage.
 
-```js
+```js :localStorageStore.js
 import { writable } from 'svelte/store';
 
 export function localStorageStore(key, initial) {
@@ -908,7 +909,7 @@ export function localStorageStore(key, initial) {
 }
 ```
 
-```svelte
+```svelte :App.svelte
 <script>
     import { localStorageStore } from './localStorageStore.js';
 
