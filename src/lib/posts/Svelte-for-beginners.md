@@ -29,14 +29,14 @@ published: true
 - [Svelte Store](#svelte-store)
 
 
-## Learning Svelte
+# Learning Svelte
 
 The best way to learn Svelte is to go through the <Link href="https://learn.svelte.dev/tutorial/welcome-to-svelte">Svelte tutorial</Link> which is great but also contains information overload if you just want to get started writing Svelte. I'm going to show you everything you should know for the majority of things you're going to build.
 
 I'm not going to assume your knowledge and try to explain everything along the way so if you're new to JavaScript frameworks or Svelte you should learn a lot.
 
 
-## What Is Svelte?
+# What Is Svelte?
 
 **Writing Svelte feels like writing regular HTML, CSS, and JavaScript.**
 
@@ -48,11 +48,11 @@ Svelte doesn't have to concern itself with the bundle size of the framework so i
 
 Svelte is comparable to React and Vue for building single page applications where your entire application lives inside one element but if you want a framework with more opinions how to write applications with routing and server-side rendering there's <Link href="https://kit.svelte.dev/">SvelteKit</Link> that's comparable to <Link href="https://remix.run/">Remix</Link> and <Link href="https://nextjs.org/">Next.js</Link> for React or <Link href="https://nuxtjs.org/">Nuxt.js</Link> for Vue.
 
-## The Single File Component
+# The Single File Component
 
 To appreciate Svelte's simplicity we're going to start with a simple counter example using regular HTML and JavaScript. If you want to code along open a <Link href="https://codepen.io/pen/">new Codepen project</Link>.
 
-```html
+```html:Example.html
 <p></p>
 <button onclick="increment()">Click</button>
 
@@ -83,7 +83,7 @@ I encourage you to **code along** and open the <Link href="https://svelte.dev/re
 
 This is the same example in Svelte.
 
-```svelte
+```svelte title='App.svelte'
 <script>
     let count = 0;
 
@@ -106,7 +106,7 @@ Inside the Svelte template you can use JavaScript **expressions** like `{count *
 
 Let's add some styles at the bottom of `App.svelte`.
 
-```html
+```html title='App.svelte'
 <style>
     p {
         color: teal;
@@ -122,7 +122,7 @@ If you look at the CSS output in the Svelte REPL you can see Svelte generated `p
 
 If you want <Link href="https://sass-lang.com/">Sass</Link> support you can just add `lang="scss"` attribute in the` <style>` tag. You can do the same with the `lang="ts"` attribute in the `<script>` tag to enable TypeScript support. Unfortunately the Svelte REPL doesn't support it so you're going to have to trust me it works in a real project.
 
-## Reactivity
+# Reactivity
 Reactivity is Svelte's superpower. If you're unfamiliar **reactivity is how you keep your DOM in sync with your application state.**
 
 When you're developing an application you want a change in your application state like adding a song to a playlist be reflected immediately in the DOM and re-render what changed.
@@ -132,7 +132,7 @@ When you're developing an application you want a change in your application stat
 Svelte's reactivity is based on **assignments**. To change state and trigger a re-render you assign a value to a variable you declared and it's going to update. We have already done this.
 
 
-```svelte
+```svelte title='App.svelte'
 <script>
 	let count = 0;
 
@@ -144,7 +144,7 @@ Svelte's reactivity is based on **assignments**. To change state and trigger a r
 
 Because we need to assign a value for Svelte to pick it up methods like `push` won't trigger an update until we reassign it. We can avoid doing the extra step by using the JavaScript spread operator `...` to keep existing items and add the new item.
 
-```svelte
+```svelte title='App.svelte'
 <script>
     let list = ['React', 'Vue'];
 
@@ -168,7 +168,7 @@ Svelte has **reactive declarations** using the `$:`` syntax which is valid <Link
 
 Using the `$:` syntax is saying “**re-run this code whenever any of the referenced values change**”.
 
-```svelte
+```svelte title='App.svelte'
 <script>
     // state
     let items = [1, 2, 3, 4];
@@ -257,7 +257,7 @@ You can have reactive blocks.
 
 Ignore the weird syntax highlighting because there isn't an extension for `.svelte` files so it's treated like `.html` which can be fixed by using quotes `on:click="{() => count += 1}"`. Your editor is going to support the syntax if you use the <Link href="https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode">Svelte for VS Code</Link> extension.
 
-## Logic
+# Logic
 Since HTML can't express logic such as conditionals and loops you would have to write something like this using JavaScript.
 
 ```html
@@ -447,7 +447,7 @@ In Svelte you can easily resolve a promise using the `#await` block but you can 
 
 In the JavaScript example we didn't even add checks for scenarios where the promise could be pending, fulfilled, or rejected and just hope it works. 😬 Using Svelte you don't have to think about it.
 
-## Events
+# Events
 If you're new to JavaScript frameworks you might be confused by the use of **inline event handlers** because so far everyone told you to avoid doing so in JavaScript. That's for a good reason because of **separation of concerns** to have our markup, styles, and logic separate which makes it easy to change and maintain.
 
 Using a modern JavaScript framework all our **concerns are in one place** using components and writing declarative code and the framework doing the heavy DOM lifting and under the hood performance optimization.
@@ -533,7 +533,7 @@ Svelte has special modifiers for DOM events such as `preventDefault`. You can fi
 
 Using `preventDefault` which is short for `event.preventDefault()` prevents the default behavior such as the form submitting causing a page reload because we want to control it using JavaScript on the client.
 
-## Bindings
+# Bindings
 **Data binding is keeping your application state and user interface synchronized.**
 
 Svelte supports **data binding** using the `bind:` directive.
@@ -606,7 +606,7 @@ Instead of using `event.target.value` which we could also do in Svelte we can bi
 
 You can have text, numeric, checkbox, group and textarea among other bindings. Instead of overwhelming you with examples you lack context for to find useful right now you can learn more about <Link href="https://svelte.dev/docs#template-syntax-element-directives-bind-property">bindings in the Svelte documentation</Link> or by following the <Link href="https://learn.svelte.dev/tutorial/text-inputs">Svelte tutorial</Link> when you encounter it in your project.
 
-## Components
+# Components
 **Components are the primary reason of using any modern JavaScript framework** because it lets you **organize** code and have your **concerns in one place**.
 
 If you ever used classes you can think of components as new instances of a class that can be used as a blueprint to have its own independent state.
@@ -744,7 +744,7 @@ We can also use a reactive statement `$: playing = playing === title` for `playi
 </style>
 ```
 
-## Slots
+# Slots
 **In Svelte we can use slots to compose components** meaning our components can contain other components and elements to be more reusable like regular HTML.
 
 ```html
@@ -823,7 +823,7 @@ This is only a couple of lines of code compared to the equivalent Three.js code 
 
 There's a lot more you can do with slot props but I encourage you to <Link href="https://svelte.dev/docs#template-syntax-slot">read the slots documentation</Link> because slots deserve their separate post.
 
-## Transitions
+# Transitions
 **Animations in Svelte are first-class** so you don't have to reach for an animation library unless you want to. To use transitions you can import `blur`, `fly`, `slide`, `scale`, `draw` and `crossfade` from `svelte/transition`.
 
 To use a transition use `transition:fade`. You can specify parameters such as `delay`, `duration`, `easing` for `fade`. To learn what they are for each transition <Link href="https://svelte.dev/docs#svelte_transition">consult the documentation</Link>.
@@ -852,7 +852,7 @@ You can specify a enter animation with `in:fade` and exit animation with `out:fa
 
 In Svelte you can define custom animations such as this <Link href="https://learn.svelte.dev/tutorial/custom-js-transitions">typewriter effect</Link>, use <Link href="https://learn.svelte.dev/tutorial/tweens">spring and tweened</Link> motion and make smooth transitions between elements using <Link href="https://learn.svelte.dev/tutorial/animate">flip animations</Link>.
 
-## Svelte Store
+# Svelte Store
 Passing data from parent to child component is described as **data flowing top to bottom** but Svelte lets you **reverse** the flow using **bindings, event forwarding** and the **context API** which you don't have to know right now because passing props is fine in most cases where you don't have deeply nested components.
 
 However, one feature you're going to use all the time is the <Link href="https://svelte.dev/docs#run-time-svelte-store">Svelte store</Link> which is Svelte's answer to **global state management**. You would reach for a store if you have **information that is required by multiple unrelated components** such as the logged in user or theme.

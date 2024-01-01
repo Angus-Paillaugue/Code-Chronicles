@@ -18,18 +18,18 @@
   let sideTOCHidden = $state(false);
 
   onMount(() => {
-    if (article.querySelector("ul:first-child")) {
+    if (article.querySelector("ol:first-child")) {
       // Add padding recursively to nested sections (ex: 1.1, 4.2.1, etc.)
       article
-        .querySelector("ul:first-child")
-        .querySelectorAll("ul")
+        .querySelector("ol:first-child")
+        .querySelectorAll("ol")
         .forEach((el) => {
           el.classList.add("pl-6");
         });
       // Clone the table of contents (TOC) and add it to the side TOC
-      const toc = article.querySelector("ul:first-child").cloneNode(true);
+      const toc = article.querySelector("ol:first-child").cloneNode(true);
       // Add classes to the cloned TOC
-      toc.classList.add("pl-12", "transition-all", "space-y-2");
+      toc.classList.add("pl-12", "transition-all", "duration-500", "space-y-2", "list-decimal", "list-inside");
       // Add styling to the side TOC items
       toc.querySelectorAll("li").forEach((el) => {
         el.classList.add("m-0");
@@ -46,27 +46,47 @@
       // Adds the side TOC to the DOM
       sideTOC.appendChild(toc);
       // Hide the main TOC greater than small screens
-      article.querySelector("ul:first-child").classList.add("lg:hidden");
+      article.querySelector("ol:first-child").classList.add("lg:hidden");
     } else {
       // Remove the side TOC if there is no TOC
       sideTOC.remove();
     }
 
+    // Add classes to the heading elements
     const headings = article.querySelectorAll("h1,h2,h3,h4,h5,h6");
     headings.forEach((heading) => {
       heading.classList.add("article-heading");
     });
+    // Add classes to the paragraph elements
     const paragraphs = article.querySelectorAll("p");
     paragraphs.forEach((paragraph) => {
       paragraph.classList.add("article-text");
     });
-    const tocLine = article.querySelectorAll("ul>li");
+    // Add classes to the TOC line elements
+    const tocLine = article.querySelectorAll("ol>li");
     tocLine.forEach((el) => {
       el.classList.add("toc");
     });
+
     // Code blocks
     const code = article.querySelectorAll("pre");
     code.forEach((el) => {
+      // Creating line number column
+      const lineNumberWrapper = document.createElement("div");
+      lineNumberWrapper.classList.add("line-numbers-wrapper");
+      // Calculating number of lines based on code block height and padding
+      const noOfLines = Math.ceil((el.clientHeight - 48) / 24);
+      // Creating line number elements and appending them to the line number column
+      for (let i = 1; i <= noOfLines; i++) {
+        const line = document.createElement("span");
+        line.innerText = i;
+        lineNumberWrapper.appendChild(line);
+      }
+      el.appendChild(lineNumberWrapper);
+      // Adding padding to the code block to accommodate the line number column width
+      el.style.paddingLeft = `${12 + 12 * (noOfLines.toString().length)}px`;
+
+      // Creating copy code button
       const copyButton = document.createElement("button");
       copyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 copy"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" /></svg><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 copied hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>`;
       copyButton.classList.add(
@@ -87,17 +107,23 @@
         "focus:outline-none"
       );
       copyButton.name = "Copy code";
+
+      // On copy code button click
       copyButton.onclick = () => {
+        // Change the button icon to a checkmark
         copyButton.querySelector(".copy").classList.add("hidden");
         copyButton.querySelector(".copied").classList.remove("hidden");
-        const textToCopy = el.innerText;
+        const textToCopy = el.querySelector("pre>code").innerText;
+        // Write the code to clipboard
         navigator.clipboard.writeText(textToCopy);
+        // Show toast
         newToast({
           title: "Copied to clipboard",
           message: "The code has been copied to your clipboard",
           type: "green",
         });
         setTimeout(() => {
+          // Reset the button icon back to default
           copyButton.querySelector(".copy").classList.remove("hidden");
           copyButton.querySelector(".copied").classList.add("hidden");
         }, 2000);
@@ -106,6 +132,7 @@
       el.appendChild(copyButton);
     });
 
+    // On scroll, highlight the current section in the side TOC
     onscroll = () => {
       scrollPos = window.scrollY + 96 + scrollOffset;
       const sections = Array.from(
@@ -117,7 +144,7 @@
         const rect = section.getBoundingClientRect();
         const top = rect.top + window.scrollY;
         if (top <= scrollPos) {
-          sideTOC.querySelectorAll("ul>li>a").forEach((el) => {
+          sideTOC.querySelectorAll("ol>li>a").forEach((el) => {
             el.classList.remove("underline");
             el.classList.add("no-underline");
           });
@@ -134,14 +161,16 @@
     onresize = setScreenRelatedValues;
   });
 
+  // Set the screen height and article height
   const setScreenRelatedValues = () => {
     screenHeight = window.innerHeight;
     articleHeight = article.clientHeight;
   };
 
+  // On toggle of the side TOC, add/remove padding to the side TOC to hide or show the text
   $effect(() => {
-    if (article.querySelector("ul:first-child")) {
-      const toc = sideTOC.querySelector("ul");
+    if (article.querySelector("ol:first-child")) {
+      const toc = sideTOC.querySelector("ol");
       if (sideTOCHidden) {
         toc.classList.add("pl-12");
       } else {
@@ -158,9 +187,12 @@
   <meta property="og:title" content={post.title} />
 </svelte:head>
 
-<!-- Back To Top Button -->
 
 {#if scrollPos > screenHeight}
+
+
+  <!-- Back To Top Button -->
+
   <button
     class="fixed bottom-2 right-2 md:bottom-4 md:right-4 w-10 h-10 z-10 rounded-full flex flex-col items-center justify-center transition bg-black-primary text-white hover:scale-105 active:scale-90"
     transition:fly={{ y: 20, duration: 150, easing: quintOut }}
@@ -186,6 +218,7 @@
     </svg>
   </button>
 
+
   <!-- Reading Progress Bar -->
 
   <div
@@ -203,16 +236,17 @@
   </div>
 {/if}
 
+
 <!-- Side Table Of Contents (TOC) -->
 
 <div
-  class="fixed top-1/2 -translate-y-1/2 right-0 z-10 rounded-l-3xl bg-white border border-border border-r-0 p-2 md:p-4 transition-all {(
+  class="fixed top-1/2 -translate-y-1/2 right-0 z-10 rounded-l-3xl bg-white border border-border border-r-0 p-2 md:p-4 transition-all duration-500 {(
     scrollPos - screenHeight < 0 ? 0 : scrollPos - screenHeight
   )
     ? sideTOCHidden
-      ? 'translate-x-full mr-12 md:mr-14 lg:mr-16'
+      ? 'translate-x-full mr-12 md:mr-14 lg:mr-16 max-w-[calc(275px+48px)]'
       : 'translate-x-0 max-w-[275px]'
-    : 'translate-x-full'} max-lg:translate-x-full"
+    : 'translate-x-full max-w-[calc(275px+48px)]'} max-lg:translate-x-full"
   bind:this={sideTOC}
 >
   <button

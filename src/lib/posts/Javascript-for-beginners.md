@@ -7,9 +7,9 @@ languages:
   - Javascript
 categories:
   - front-end
-published: true
+published: false
 ---
 
-- [What is Javascript](#what-is-javascript)
+1. [What is Javascript](#what-is-javascript)
    
 ## What is Javascript

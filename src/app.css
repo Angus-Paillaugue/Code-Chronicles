@@ -7,47 +7,15 @@
 @tailwind utilities;
 
 * {
-	scroll-behavior: smooth;
-	box-sizing: border-box
+  @apply scroll-smooth;
 }
-
 html {
   scroll-padding-top: 6rem;
   @apply font-sans;
 }
 body {
-  @apply bg-repeat-y bg-center font-['Mulish'];
+  @apply font-['Mulish'];
 }
-
-/* Text */
-h1, h2, h3, h4, h5, h6 {
-  text-wrap: balance;
-  @apply font-['Poppins'];
-}
-h1 {
-  @apply font-medium md:font-semibold text-5xl md:text-6xl leading-[3.5rem] md:leading-[4rem] mb-4;
-}
-h2 {
-  @apply font-bold text-lg leading-6 mb-3;
-}
-h6 {
-  @apply font-semibold text-base leading-5 mb-3;
-}
-p, li {
-  @apply font-['Mulish'] text-lg font-medium leading-6 mb-4;
-}
-p.balance {
-  text-wrap: balance;
-}
-
-hr {
-	@apply border-none h-1 bg-border my-8;
-}
-
-a.link {
-  @apply underline font-bold hover:no-underline transition-all cursor-pointer;
-}
-
 ::-webkit-scrollbar {
 	@apply w-2 h-2
 }
@@ -60,10 +28,41 @@ a.link {
 ::-webkit-scrollbar-thumb:hover {
 	@apply bg-neutral-500
 }
+::selection {
+  @apply text-white bg-black-primary;
+}
+
+/* Text */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-['Poppins'] text-wrap-balance;
+}
+h1 {
+  @apply font-medium md:font-semibold text-3xl md:text-6xl leading-[3.5rem] md:leading-[4rem] mb-4;
+}
+h2 {
+  @apply font-bold text-lg leading-6 mb-3;
+}
+h6 {
+  @apply font-semibold text-base leading-5 mb-3;
+}
+p, li {
+  @apply font-['Mulish'] text-lg font-medium leading-6 mb-4;
+}
+p.balance {
+  @apply text-wrap-balance;
+}
+
+hr {
+	@apply border-none h-1 bg-border my-8;
+}
+
+a.link {
+  @apply underline font-bold hover:no-underline transition-all cursor-pointer;
+}
 
 /* Tooltip */
 [data-tooltip]{
-	@apply cursor-pointer relative inline-block after:content-[attr(data-tooltip)] after:absolute after:shadow-lg after:opacity-0 after:transition-all after:ease-in-out after:pointer-events-none hover:after:opacity-100 after:z-30 focus:after:opacity-100 focus:after:z-30 after:p-3 after:rounded-md after:max-w-[300px] after:break-words after:h-auto after:bg-black-primary dark:after:bg-neutral-700 after:text-sm after:leading-4 after:-translate-x-1/2 after:bottom-full after:top-auto after:left-1/2 after:mb-2 after:translate-y-4 hover:after:-translate-y-0 focus:after:-translate-y-0 after:text-white after:dark:text-black-primary after:font-medium;
+	@apply cursor-pointer relative inline-block after:content-[attr(data-tooltip)] after:absolute after:shadow-lg after:opacity-0 after:transition-all after:ease-in-out after:pointer-events-none hover:after:opacity-100 after:z-30 focus:after:opacity-100 focus:after:z-30 after:p-3 after:rounded-md after:max-w-[300px] after:break-words after:h-auto after:bg-black-primary dark:after:bg-neutral-700 dark:after:text-white after:text-sm after:leading-4 after:-translate-x-1/2 after:bottom-full after:top-auto after:left-1/2 after:mb-2 after:translate-y-4 hover:after:-translate-y-0 focus:after:-translate-y-0 after:text-white after:font-medium;
 }
 .tooltip-small {
   @apply after:p-2 after:rounded after:max-w-[200px] after:text-xs after:leading-3;
@@ -86,107 +85,102 @@ a.link {
 /* Posts CSS */
 
 h1.article-heading {
-  @apply text-4xl font-bold mb-6;
+  @apply text-4xl font-bold mb-4;
 }
 h2.article-heading {
-  @apply text-3xl font-bold mb-6;
+  @apply text-3xl font-bold mb-4;
 }
 h3.article-heading {
-  @apply text-2xl font-bold mb-6;
+  @apply text-2xl font-bold mb-4;
 }
 h4.article-heading {
-  @apply text-xl font-bold mb-6;
+  @apply text-xl font-bold mb-4;
 }
 h5.article-heading {
-  @apply text-lg font-bold mb-6;
+  @apply text-lg font-bold mb-4;
 }
 h6.article-heading {
-  @apply text-base font-bold mb-6;
+  @apply text-base font-bold mb-4;
 }
 p.article-text:not(:last-child) {
-  @apply mb-8 font-normal text-lg leading-8;
+  @apply mb-4 font-normal text-lg leading-8;
+}
+p.article-text + .article-heading {
+  @apply mt-10;
 }
 p.article-text:last-child {
   @apply mb-0;
 }
 li.toc {
-	@apply my-1 font-normal text-lg leading-8 list-inside list-image-square;
+	@apply my-1 font-normal text-lg leading-8 list-inside list-decimal;
 }
 
-pre {
-  @apply rounded-lg p-4 mb-4;
+/* Others */
+kbd {
+  @apply font-mono text-sm bg-neutral-300 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-md px-2 py-1;
+}
+ul {
+  @apply list-image-square list-inside;
+}
+
+
+/* File name */
+.remark-code-title {
+  @apply text-base font-medium bg-neutral-300 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-t-md px-3 py-1;
+}
+/* Line numbers */
+.line-numbers-wrapper {
+  @apply text-sm font-normal text-neutral-500 dark:text-neutral-400 select-none flex flex-col absolute top-0 leading-[1.5rem] px-2 py-4 left-0 bottom-0 pointer-events-none;
 }
 code {
-  font-family: 'JetBrains Mono', monospace;
-  font-variant-ligatures: normal;
-  background-color: hsl(220, 13%, 18%);
-  color: hsl(220, 14%, 71%);
-  @apply rounded-lg px-1 py-0.5 text-sm;
+  @apply px-1 py-0.5 rounded-md text-base bg-neutral-800 text-gray-400 font-mono ligatures-normal text-shadow-code;
 }
 code[class*="language-"],
 pre[class*="language-"] {
-  background: hsl(220, 13%, 18%);
-  color: hsl(220, 14%, 71%);
-  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-  font-family: 'JetBrains Mono', monospace;
-  font-variant-ligatures: normal;
   direction: ltr;
-  text-align: left;
-  word-spacing: normal;
-  word-break: normal;
-  text-wrap: wrap;
-  white-space: pre-wrap;       /* css-3 */
-  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-  white-space: -pre-wrap;      /* Opera 4-6 */
-  white-space: -o-pre-wrap;    /* Opera 7 */
-  word-wrap: break-word;       /* Internet Explorer 5.5+ */
-  line-height: 1.5;
   -moz-tab-size: 2;
   -o-tab-size: 2;
   tab-size: 2;
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
+  @apply bg-neutral-800 text-gray-400 text-shadow-code font-mono ligatures-normal hyphens-none whitespace-pre-wrap leading-6 text-left text-wrap p-0;
+}
+
+/* Add styling to code blocks */
+pre[class*="language-"] {
+  @apply p-4 rounded-lg mb-4;
 }
 
 code[class*="language-"]::-moz-selection,
 pre[class*="language-"]::-moz-selection,
 code[class*="language-"] ::-moz-selection,
-pre[class*="language-"] ::-moz-selection {
-  background: hsl(220, 13%, 28%);
-  color: inherit;
-  text-shadow: none;
-}
-
+pre[class*="language-"] ::-moz-selection,
 code[class*="language-"]::selection,
 pre[class*="language-"]::selection,
 code[class*="language-"] ::selection,
 pre[class*="language-"] ::selection {
-  background: hsl(220, 13%, 28%);
-  color: inherit;
-  text-shadow: none;
-}
-pre[class*="language-"] {
-  padding: 1em;
-  margin: 0.5em 0;
-  overflow: auto;
-  border-radius: 0.3em;
+  @apply text-shadow-none;
 }
 
+
+/* Add or remove rounded to code blocks depending
+   of if they have a title or not
+*/
 :not(pre) > code[class*="language-"] {
-  padding: 0.2em 0.3em;
-  border-radius: 0.3em;
-  white-space: normal;
+  @apply rounded-lg p-4 whitespace-normal;
+}
+.remark-code-title + pre[class*="language-"] {
+  @apply rounded-t-none;
 }
 
+/* Printing page */
 @media print {
   code[class*="language-"],
   pre[class*="language-"] {
-      text-shadow: none;
+    @apply text-shadow-none;
   }
 }
 
+
+/* Code tokens */
 .token.comment,
 .token.prolog,
 .token.cdata {
@@ -323,20 +317,16 @@ pre[class*="language-"] {
 .language-markdown .token.title.important > .token.punctuation {
   color: hsl(355, 65%, 65%);
 }
-
 .token.bold {
-  font-weight: bold;
+  @apply font-bold;
 }
-
 .token.comment,
 .token.italic {
   font-style: italic;
 }
-
 .token.entity {
-  cursor: help;
+  @apply cursor-help;
 }
-
 .token.namespace {
-  opacity: 0.8;
+  @apply opacity-80;
 }

@@ -1,15 +1,15 @@
 <script>
   import { afterNavigate } from "$app/navigation";
   // import { onMount } from "svelte";
-  import { fly } from "svelte/transition";
+  import { fly, fade } from "svelte/transition";
   import { quintOut } from "svelte/easing";
   import { Input, LanguageIcon } from "$lib/components/";
   import { page } from "$app/stores";
 
   let searchModal = $state(false);
-  let recognition;
+  // let recognition;
   // let searchInputValue = $state("");
-  let lang;
+  // let lang;
   // let doesNotSupportSpeech = $state(false);
   let mobileNavBar = $state(false);
   let navbarDropdown = $state(false);
@@ -194,50 +194,57 @@
   <!-- Search modal, show/hide based on modal state. -->
   {#if searchModal}
     <div
-      class="z-40 realtive fixed top-20 right-0 left-0 overflow-y-auto bg-white px-6 py-6 sm:ring-1 sm:ring-gray-900/10"
-      role="dialog"
-      aria-modal="true"
-      transition:fly={{ y: 20, duration: 150, easing: quintOut }}
+      class="z-30 realtive fixed top-20 right-0 left-0 bottom-0"
+      on:click={() => (searchModal = false)}
+      transition:fly={{ y: 20, duration: 300, easing: quintOut }}
     >
-      <form action="/search" method="GET" class="w-full relative">
-        <Input name="query" placeholder="Search" />
+      <div
+        class="bg-white px-6 py-6 border-y border-border"
+        role="dialog"
+        aria-modal="true"
+      >
+        <form action="/search" method="GET" class="w-full relative">
+          <Input name="query" placeholder="Search" />
 
-        <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
-          <button type="submit" class="text-gray-600 hover:text-gray-700">
-            <span class="sr-only">Search</span>
+          <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
+            <button type="submit" class="text-gray-600 hover:text-gray-700">
+              <span class="sr-only">Search</span>
 
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="h-4 w-4"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-              />
-            </svg>
-          </button>
-        </span>
-      </form>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="h-4 w-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                />
+              </svg>
+            </button>
+          </span>
+        </form>
+      </div>
     </div>
   {/if}
 
   <!-- Mobile menu, show/hide based on menu open state. -->
-  <div
-    class="lg:hidden transition-[opacity,_visibility] realtive {mobileNavBar
-      ? 'opacity-100 z-40 visible'
-      : 'opacity-0 -z-10 invisible'}"
-    role="dialog"
-    aria-modal="true"
-  >
-    <!-- Background backdrop -->
-    <div class="fixed inset-0 bg-neutral-700/30"></div>
+  <!-- Background backdrop -->
+  {#if mobileNavBar}
     <div
-      class="fixed inset-y-0 right-0 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+      class="fixed inset-0 z-30 bg-neutral-700/30"
+      on:click={() => (mobileNavBar = false)}
+      transition:fade={{ duration: 200 }}
+    ></div>
+
+    <div
+      class="lg:hidden transition-[opacity,_visibility] z-40 top-0 fixed inset-y-0 right-0 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+      role="dialog"
+      aria-modal="true"
+      transition:fly={{ x: "100%", duration: 500 }}
     >
       <div class="flex items-center justify-end">
         <button
@@ -326,5 +333,5 @@
         </div>
       </div>
     </div>
-  </div>
+  {/if}
 </header>

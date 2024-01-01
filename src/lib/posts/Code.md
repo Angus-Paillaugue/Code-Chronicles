@@ -8,15 +8,15 @@ languages:
   - Javascript
 categories:
   - others
-published: true
+published: false
 ---
 
-- [Part 1](#part-1)
-  - [Part 1.1](#part-11)
-  - [Part 1.2](#part-12)
-- [Part 2](#part-2)
-  - [Part 2.1](#part-21)
-  - [Part 2.2](#part-22)
+1. [Part 1](#part-1)
+   1. [Part 1.1](#part-11)
+   2. [Part 1.2](#part-12)
+2. [Part 2](#part-2)
+   1. [Part 2.1](#part-21)
+   2. [Part 2.2](#part-22)
 
 
 
@@ -27,7 +27,7 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero ipsam veritatis co
 ```js
 // This function logs all the arguments passes to it
 const test = (...args) => {
-    console.log(args);
+  console.log(args);
 }
 
 test(1, "2", { o: 1, f: [ 1, 2, 2 ] }, [ "i", "j" ]) // [1, '2', {o: 1, f: [1, 2, 2]}, ['i', 'j']]
@@ -46,9 +46,9 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero ipsam veritatis co
 ```js
 // This function logs all the arguments passes to it
 const test = (...args) => {
-    for(const arg in args) {
-        console.log(arg);
-    }
+  for(const arg in args) {
+    console.log(arg);
+  }
 }
 
 test(1, "2", { o: 1, f: [ 1, 2, 2 ] }, [ "i", "j" ])
@@ -62,9 +62,9 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero ipsam veritatis co
 ```js
 // This function logs all the arguments passes to it
 const test = (...args) => {
-    for(const arg in args) {
-        console.log(arg);
-    }
+  for(const arg in args) {
+    console.log(arg);
+  }
 }
 
 test(1, "2", { o: 1, f: [ 1, 2, 2 ] }, [ "i", "j" ])
@@ -83,9 +83,9 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero ipsam veritatis co
 ```js
 // This function logs all the arguments passes to it
 const test = (...args) => {
-    for(const arg in args) {
-        console.log(arg);
-    }
+  for(const arg in args) {
+    console.log(arg);
+  }
 }
 
 test(1, "2", { o: 1, f: [ 1, 2, 2 ] }, [ "i", "j" ])
