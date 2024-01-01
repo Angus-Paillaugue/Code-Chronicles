@@ -1,5 +1,4 @@
-export async function load({ params, data }) {
-    const { name } = params;
-    const component = await import(`../../../lib/posts/${name}.md`);
+export async function load({ data }) {
+    const component = await import(`../../../lib/posts/${data.post.slug}.md`);
     return { component: component.default, ...data }
 };

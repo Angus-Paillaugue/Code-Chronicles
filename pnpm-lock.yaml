@@ -32,6 +32,9 @@ dependencies:
   remark-unwrap-images:
     specifier: ^4.0.0
     version: 4.0.0
+  svelte-selfheal:
+    specifier: ^0.1.0
+    version: 0.1.0(svelte@5.0.0-next.26)
 
 devDependencies:
   '@sveltejs/adapter-auto':
@@ -2396,6 +2399,14 @@ packages:
       marked: 5.1.2
       svelte: 5.0.0-next.26
     dev: true
+
+  /svelte-selfheal@0.1.0(svelte@5.0.0-next.26):
+    resolution: {integrity: sha512-NGj/X7CVr/1GrU32dQ8I2g7U8noJV99HNdU7HwFvE5wgLlqg0yk33gAZtybnxDr3xBemnGSjqqCGHA8fqXQ2tg==}
+    peerDependencies:
+      svelte: ^4.0.0
+    dependencies:
+      svelte: 5.0.0-next.26
+    dev: false
 
   /svelte@5.0.0-next.26:
     resolution: {integrity: sha512-Dd2RfhZT8Ib4mVY2eOOp5r39m6y/H4tfowIOGcotbpqOjWwEpvVHcvLJ9mF/fB+aMaOcljIia4cO62A25zRRiA==}

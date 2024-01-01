@@ -30,6 +30,7 @@
 		"mongodb": "^6.3.0",
 		"rehype-slug": "^6.0.0",
 		"remark-flexible-code-titles": "^1.1.4",
-		"remark-unwrap-images": "^4.0.0"
+		"remark-unwrap-images": "^4.0.0",
+		"svelte-selfheal": "^0.1.0"
 	}
 }

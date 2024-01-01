@@ -16,13 +16,19 @@ export function allPosts() {
 	posts = posts.sort((first, second) =>
         new Date(second.date).getTime() - new Date(first.date).getTime()
 	);
+	posts = posts.map((post, index) => ({ ...post, id: index }));
 
     return posts;
 }
 
+
 export function postBySlug(slug) {
     const posts = allPosts();
     return posts.find(post => post.slug === slug);
+}
+export function postById(id) {
+	const posts = allPosts();
+    return posts.find(post => post.id == id);
 }
 
 export function postsByLanguage(language) {
