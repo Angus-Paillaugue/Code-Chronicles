@@ -3,10 +3,10 @@ import { postById, postBySlug } from '$lib/server/posts';
 import { urlHealer } from '$lib/utils';
 
 export const load = async ({ params }) => {
-    const name = urlHealer.sanitize(params.name);
+    const urlName = urlHealer.sanitize(params.name);
 
     // Isolate the identifier at the end of the URL
-    const identifier = urlHealer.identifier.separate(name);
+    const identifier = urlHealer.identifier.separate(urlName);
     if(!identifier) {
         throw error(404, 'Post not found');
     }
@@ -18,12 +18,13 @@ export const load = async ({ params }) => {
     }
     // If the identifier is a slug, fetch the post by its slug
     if(!post) {
-        post = postBySlug(name);
+        post = postBySlug(urlName);
         if(!post) throw error(404, 'Post not found');
     }
     
     // Redirect to the correct URL if the slug is incorrect or is missing the identifier
-    if(name !== urlHealer.identifier.join(post.slug, post.id)) throw redirect(307, `/post/${urlHealer.identifier.join(post.slug, post.id)}`);
+    const correctUrl = urlHealer.identifier.join(post.slug, post.id)
+    if(urlName !== correctUrl) throw redirect(307, `/post/${urlHealer.identifier.join(post.slug, post.id)}`);
     
     return { post };
 };

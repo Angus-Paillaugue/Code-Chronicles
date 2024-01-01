@@ -7,8 +7,14 @@ export function formatDate(date, dateStyle = 'medium', locales = 'en') {
 export const urlHealer = {
 	identifier: {
 		separate: (url) => {
-			const [id, slug] = url.split('-').reverse();
-			return { id, slug };
+			const regex = /(\d+)$/;
+			const [_, id] = url.match(regex) || [];
+			const rest = url.replace(regex, "").split('-');
+
+			return {
+				id,
+				slug: rest.reverse().join('-')
+			};	
 		},
 		join: (slug, id) => `${slug}-${id}`
 	},
