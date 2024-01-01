@@ -1,2 +1,4 @@
 # TODO
- - [ ] Footer
+
+- [x] Footer
+- [x] Url healing

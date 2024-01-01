@@ -1,16 +1,13 @@
 <script>
-    import { twMerge } from 'tailwind-merge';
-    
-    let { children, class: linkClasses, href, target, ...restProps } = $props();
+  import { twMerge } from 'tailwind-merge';
 
-    target = target || '_blank';
+  let { children, class: linkClasses, href, target, ...restProps } = $props();
 
-    const finalClasses = twMerge(
-        'link',
-        linkClasses
-    );
+  target = target || '_blank';
+
+  const finalClasses = twMerge('link', linkClasses);
 </script>
 
-<a  {...restProps} {href} {target} class={finalClasses}>
-    {@render children()}
+<a {...restProps} {href} {target} class={finalClasses}>
+  {@render children()}
 </a>

@@ -1,32 +1,32 @@
 <script>
-  import { Post } from "$lib/components/";
-//   import Input from "$lib/components/Input.svelte";
+  import { Post } from '$lib/components/';
+  //   import Input from "$lib/components/Input.svelte";
 
   const { data } = $props();
   let posts = $state(data.posts);
-//   let searchInputValue = $state("");
-  const theme = "light";
+  //   let searchInputValue = $state("");
+  const theme = 'light';
 
-//   $effect(() => {
-//     const tolerance = 0;
-//     // Filter the posts based on searchInputValue
-//     posts = Object.fromEntries(
-//       Object.entries(data.posts).filter(([category, _]) => {
-//         const categoryLowerCase = category.toLowerCase();
-//         const searchInputValueLowerCase = searchInputValue.toLowerCase();
-//         let mismatchCount = 0;
+  //   $effect(() => {
+  //     const tolerance = 0;
+  //     // Filter the posts based on searchInputValue
+  //     posts = Object.fromEntries(
+  //       Object.entries(data.posts).filter(([category, _]) => {
+  //         const categoryLowerCase = category.toLowerCase();
+  //         const searchInputValueLowerCase = searchInputValue.toLowerCase();
+  //         let mismatchCount = 0;
 
-//         for (let i = 0; i < searchInputValueLowerCase.length; i++) {
-//           if (categoryLowerCase[i] !== searchInputValueLowerCase[i])
-//             mismatchCount++;
+  //         for (let i = 0; i < searchInputValueLowerCase.length; i++) {
+  //           if (categoryLowerCase[i] !== searchInputValueLowerCase[i])
+  //             mismatchCount++;
 
-//           if (mismatchCount > tolerance) return false;
-//         }
+  //           if (mismatchCount > tolerance) return false;
+  //         }
 
-//         return true;
-//       })
-//     );
-//   });
+  //         return true;
+  //       })
+  //     );
+  //   });
 </script>
 
 <svelte:head>
@@ -42,7 +42,9 @@
   /> -->
   {#each Object.entries(posts) as [category, postsInCategory]}
     <div class="pb-2 md:pb-4 lg:pb-6">
-      <h2>{category}</h2>
+      <h2>
+        {category}
+      </h2>
       <div
         class="grid gap-4"
         style="grid-template-rows: min-content;grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));"

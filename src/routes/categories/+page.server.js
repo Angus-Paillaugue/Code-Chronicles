@@ -1,4 +1,4 @@
-import { allPosts } from "$lib/server/posts";
+import { allPosts } from '$lib/server/posts';
 
 export const load = async ({}) => {
   let posts = allPosts();
@@ -19,5 +19,7 @@ export const load = async ({}) => {
       return obj;
     }, {});
 
-  return { posts: postsByCategory };
+  return {
+    posts: postsByCategory,
+  };
 };

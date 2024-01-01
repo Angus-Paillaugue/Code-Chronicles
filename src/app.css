@@ -17,23 +17,28 @@ body {
   @apply font-['Mulish'];
 }
 ::-webkit-scrollbar {
-	@apply w-2 h-2
+  @apply w-2 h-2;
 }
 ::-webkit-scrollbar-track {
-	@apply bg-neutral-300
+  @apply bg-neutral-300;
 }
 ::-webkit-scrollbar-thumb {
-	@apply rounded-full bg-neutral-400
+  @apply rounded-full bg-neutral-400;
 }
 ::-webkit-scrollbar-thumb:hover {
-	@apply bg-neutral-500
+  @apply bg-neutral-500;
 }
 ::selection {
   @apply text-white bg-black-primary;
 }
 
 /* Text */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   @apply font-['Poppins'] text-wrap-balance;
 }
 h1 {
@@ -45,7 +50,8 @@ h2 {
 h6 {
   @apply font-semibold text-base leading-5 mb-3;
 }
-p, li {
+p,
+li {
   @apply font-['Mulish'] text-lg font-medium leading-6 mb-4;
 }
 p.balance {
@@ -53,7 +59,7 @@ p.balance {
 }
 
 hr {
-	@apply border-none h-1 bg-border my-8;
+  @apply border-none h-1 bg-border my-8;
 }
 
 a.link {
@@ -61,26 +67,24 @@ a.link {
 }
 
 /* Tooltip */
-[data-tooltip]{
-	@apply cursor-pointer relative inline-block after:content-[attr(data-tooltip)] after:absolute after:shadow-lg after:opacity-0 after:transition-all after:ease-in-out after:pointer-events-none hover:after:opacity-100 after:z-30 focus:after:opacity-100 focus:after:z-30 after:p-3 after:rounded-md after:max-w-[300px] after:break-words after:h-auto after:bg-black-primary dark:after:bg-neutral-700 dark:after:text-white after:text-sm after:leading-4 after:-translate-x-1/2 after:bottom-full after:top-auto after:left-1/2 after:mb-2 after:translate-y-4 hover:after:-translate-y-0 focus:after:-translate-y-0 after:text-white after:font-medium;
+[data-tooltip] {
+  @apply cursor-pointer relative inline-block after:content-[attr(data-tooltip)] after:absolute after:shadow-lg after:opacity-0 after:transition-all after:ease-in-out after:pointer-events-none hover:after:opacity-100 after:z-30 focus:after:opacity-100 focus:after:z-30 after:p-3 after:rounded-md after:max-w-[300px] after:break-words after:h-auto after:bg-black-primary dark:after:bg-neutral-700 dark:after:text-white after:text-sm after:leading-4 after:-translate-x-1/2 after:bottom-full after:top-auto after:left-1/2 after:mb-2 after:translate-y-4 hover:after:-translate-y-0 focus:after:-translate-y-0 after:text-white after:font-medium;
 }
 .tooltip-small {
   @apply after:p-2 after:rounded after:max-w-[200px] after:text-xs after:leading-3;
 }
 /* Left */
 .tooltip-left {
-	@apply after:-translate-y-1/2 after:-translate-x-full after:top-1/2 after:bottom-auto hover:after:-left-2 after:right-auto after:mb-0 hover:after:-translate-y-1/2 focus:after:-translate-y-1/2;
+  @apply after:-translate-y-1/2 after:-translate-x-full after:top-1/2 after:bottom-auto hover:after:-left-2 after:right-auto after:mb-0 hover:after:-translate-y-1/2 focus:after:-translate-y-1/2;
 }
 /* Bottom */
 .tooltip-bottom {
-	@apply after:top-full after:left-1/2 after:bottom-auto after:right-auto after:-translate-y-4 hover:after:translate-y-0 focus:after:translate-y-0 after:mb-0;
+  @apply after:top-full after:left-1/2 after:bottom-auto after:right-auto after:-translate-y-4 hover:after:translate-y-0 focus:after:translate-y-0 after:mb-0;
 }
 /* Right */
 .tooltip-right {
-	@apply after:-translate-y-1/2 after:translate-x-1/2 after:top-1/2 after:bottom-auto hover:after:mr-2 after:mr-0 after:right-auto after:mb-0 hover:after:-translate-y-1/2 focus:after:-translate-y-1/2;
+  @apply after:-translate-y-1/2 after:translate-x-1/2 after:top-1/2 after:bottom-auto hover:after:mr-2 after:mr-0 after:right-auto after:mb-0 hover:after:-translate-y-1/2 focus:after:-translate-y-1/2;
 }
-
-
 
 /* Posts CSS */
 
@@ -113,7 +117,7 @@ p.article-text:last-child {
 }
 /* TOC */
 li.toc {
-	@apply my-1 font-bold text-lg leading-8 list-inside list-decimal;
+  @apply my-1 font-bold text-lg leading-8 list-inside list-decimal;
 }
 ol:has(li.toc) {
   @apply mb-8;
@@ -127,7 +131,6 @@ ul {
   @apply list-image-square list-inside;
 }
 
-
 /* File name */
 .remark-code-title {
   @apply text-base font-medium bg-neutral-300 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-t-md px-3 py-1;
@@ -139,8 +142,8 @@ ul {
 code {
   @apply px-1 py-0.5 rounded-md text-base bg-black-primary text-gray-400 font-mono ligatures-normal text-shadow-code;
 }
-code[class*="language-"],
-pre[class*="language-"] {
+code[class*='language-'],
+pre[class*='language-'] {
   direction: ltr;
   -moz-tab-size: 2;
   -o-tab-size: 2;
@@ -148,38 +151,36 @@ pre[class*="language-"] {
   @apply bg-neutral-800 text-gray-400 text-shadow-code font-mono ligatures-normal hyphens-none whitespace-pre-wrap text-left text-wrap p-0 max-md:text-sm leading-6 max-md:leading-6 max-md:whitespace-pre max-md:overflow-x-auto;
 }
 
-
 /* Add styling to code blocks */
-pre[class*="language-"] {
+pre[class*='language-'] {
   @apply p-4 rounded-lg mb-4;
 }
-code[class*="language-"]::-moz-selection,
-pre[class*="language-"]::-moz-selection,
-code[class*="language-"] ::-moz-selection,
-pre[class*="language-"] ::-moz-selection,
-code[class*="language-"]::selection,
-pre[class*="language-"]::selection,
-code[class*="language-"] ::selection,
-pre[class*="language-"] ::selection {
+code[class*='language-']::-moz-selection,
+pre[class*='language-']::-moz-selection,
+code[class*='language-'] ::-moz-selection,
+pre[class*='language-'] ::-moz-selection,
+code[class*='language-']::selection,
+pre[class*='language-']::selection,
+code[class*='language-'] ::selection,
+pre[class*='language-'] ::selection {
   @apply text-shadow-none;
 }
 /* Add or remove rounded to code blocks depending
    of if they have a title or not
 */
-:not(pre) > code[class*="language-"] {
+:not(pre) > code[class*='language-'] {
   @apply rounded-lg p-4 whitespace-normal;
 }
-.remark-code-title + pre[class*="language-"] {
+.remark-code-title + pre[class*='language-'] {
   @apply rounded-t-none;
 }
 /* Printing page */
 @media print {
-  code[class*="language-"],
-  pre[class*="language-"] {
+  code[class*='language-'],
+  pre[class*='language-'] {
     @apply text-shadow-none;
   }
 }
-
 
 /* Code tokens */
 .token.comment,
@@ -267,7 +268,10 @@ pre[class*="language-"] ::selection {
   color: hsl(286, 60%, 67%);
 }
 
-.language-javascript .token.template-string > .token.interpolation > .token.interpolation-punctuation.punctuation {
+.language-javascript
+  .token.template-string
+  > .token.interpolation
+  > .token.interpolation-punctuation.punctuation {
   color: hsl(5, 48%, 51%);
 }
 

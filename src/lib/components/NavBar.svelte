@@ -1,10 +1,10 @@
 <script>
-  import { afterNavigate } from "$app/navigation";
+  import { afterNavigate } from '$app/navigation';
   // import { onMount } from "svelte";
-  import { fly, fade } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
-  import { Input, LanguageIcon } from "$lib/components/";
-  import { page } from "$app/stores";
+  import { fly, fade } from 'svelte/transition';
+  import { quintOut } from 'svelte/easing';
+  import { Input, LanguageIcon } from '$lib/components/';
+  import { page } from '$app/stores';
 
   let searchModal = $state(false);
   // let recognition;
@@ -13,12 +13,12 @@
   // let doesNotSupportSpeech = $state(false);
   let mobileNavBar = $state(false);
   let navbarDropdown = $state(false);
-  const theme = "light";
+  const theme = 'light';
 
   $effect(() => {
     searchModal = searchModal;
     setTimeout(() => {
-      if (searchModal) document.getElementsByName("query")[0].focus();
+      if (searchModal) document.getElementsByName('query')[0].focus();
     }, 150);
   });
 
@@ -127,7 +127,9 @@
                     <span class="absolute inset-0"></span>
                   </div>
                   <p class="mt-1 text-gray-600">
-                    All {language} related articles
+                    All
+                    {language}
+                    related articles
                   </p>
                 </div>
               </a>
@@ -158,17 +160,14 @@
         </div>
       </div>
 
-      <a
-        href="/categories/front-end"
-        class="text-sm font-semibold leading-6 text-black-primary">Front-end</a
+      <a href="/categories/front-end" class="text-sm font-semibold leading-6 text-black-primary"
+        >Front-end</a
       >
-      <a
-        href="/categories/back-end"
-        class="text-sm font-semibold leading-6 text-black-primary">Back-end</a
+      <a href="/categories/back-end" class="text-sm font-semibold leading-6 text-black-primary"
+        >Back-end</a
       >
-      <a
-        href="/categories/others"
-        class="text-sm font-semibold leading-6 text-black-primary">Others</a
+      <a href="/categories/others" class="text-sm font-semibold leading-6 text-black-primary"
+        >Others</a
       >
     </div>
     <div class="max-lg:hidden flex-1 flex justify-end">
@@ -196,13 +195,13 @@
     <div
       class="z-30 realtive fixed top-20 right-0 left-0 bottom-0"
       on:click={() => (searchModal = false)}
-      transition:fly={{ y: 20, duration: 300, easing: quintOut }}
+      transition:fly={{
+        y: 20,
+        duration: 300,
+        easing: quintOut,
+      }}
     >
-      <div
-        class="bg-white px-6 py-6 border-y border-border"
-        role="dialog"
-        aria-modal="true"
-      >
+      <div class="bg-white px-6 py-6 border-y border-border" role="dialog" aria-modal="true">
         <form action="/search" method="GET" class="w-full relative">
           <Input name="query" placeholder="Search" />
 
@@ -237,14 +236,19 @@
     <div
       class="fixed inset-0 z-30 bg-neutral-700/30"
       on:click={() => (mobileNavBar = false)}
-      transition:fade={{ duration: 200 }}
+      transition:fade={{
+        duration: 200,
+      }}
     ></div>
 
     <div
       class="lg:hidden transition-[opacity,_visibility] z-40 top-0 fixed inset-y-0 right-0 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
       role="dialog"
       aria-modal="true"
-      transition:fly={{ x: "100%", duration: 500 }}
+      transition:fly={{
+        x: '100%',
+        duration: 500,
+      }}
     >
       <div class="flex items-center justify-end">
         <button
@@ -261,11 +265,7 @@
             stroke="currentColor"
             aria-hidden="true"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
@@ -280,8 +280,7 @@
               >
                 Languages
                 <svg
-                  class="h-5 w-5 flex-none {navbarDropdown &&
-                    'rotate-180'} transition-all"
+                  class="h-5 w-5 flex-none {navbarDropdown && 'rotate-180'} transition-all"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                   aria-hidden="true"
