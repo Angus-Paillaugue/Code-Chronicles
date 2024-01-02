@@ -1,5 +1,8 @@
+import getPostComponent from '$lib/posts';
+
 export async function load({ data }) {
-  const component = await import(`../../../lib/posts/${data.post.slug}.md`);
+  const component = await getPostComponent(data.post.slug);
+
   return {
     component: component.default,
     ...data,
