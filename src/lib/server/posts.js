@@ -29,9 +29,9 @@ export function allPosts() {
   return posts;
 }
 
-export function postBySlug(slug) {
+export async function postBySlug(slug) {
   const posts = allPosts();
-  return posts.find((post) => post.slug === slug);
+  return posts.find((post) => post.slug == slug);
 }
 export function postById(id) {
   const posts = allPosts();
@@ -48,11 +48,32 @@ export function postsByCategory(category) {
   return posts.filter((post) => post.categories.includes(category));
 }
 
+function calculateTolerance(str1, str2) {
+  const maxTolerance = 2;
+  const minLength = Math.min(str1.length, str2.length);
+  let tolerance = 0;
+
+  for (let i = 0; i < minLength; i++) {
+    if (str1[i] !== str2[i]) {
+      tolerance++;
+      if (tolerance > maxTolerance) return false;
+    }
+  }
+
+  return true;
+}
+
 export function searchPosts(query) {
   const posts = allPosts();
+  const searchQuery = query.toLowerCase();
+
   return posts.filter((post) => {
     const { title, languages, categories } = post;
-    const searchQuery = new RegExp(query, 'i');
-    return languages.includes(query) || categories.includes(query) || title.match(searchQuery);
+    const postTitle = title.toLowerCase();
+
+    if (languages.includes(searchQuery) || categories.includes(searchQuery)) return true;
+    if (calculateTolerance(postTitle, searchQuery)) return true;
+
+    return false;
   });
 }

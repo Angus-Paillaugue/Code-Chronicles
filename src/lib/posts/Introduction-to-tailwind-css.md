@@ -1,7 +1,7 @@
 ---
 title: Introduction to TailwindCSS
 description: A simple TailwindCSS tutorial for beginners
-banner: /postsAssets/Javascript-for-beginners.jpg
+banner: /postsAssets/introduction-to-tailwind-css.png
 date: '2024-01-01'
 languages:
   - TailwindCSS

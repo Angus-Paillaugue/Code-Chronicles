@@ -1,7 +1,7 @@
 ---
 title: Javascript for beginners
 description: A simple Javascript tutorial for beginners
-banner: /postsAssets/Javascript-for-beginners.jpg
+banner: /postsAssets/javascript-for-beginners.jpg
 date: '2023-12-29'
 languages:
   - Javascript

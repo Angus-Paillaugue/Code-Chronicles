@@ -39,7 +39,9 @@
         <div
           data-tooltip={language}
           class="tech-stack tooltip-small"
-          data-flip-id="post-tech-stack-{post.title.split(' ').join('-') + '-' + language}"
+          data-flip-id="post-tech-stack-{post.title.split(' ').join('-') +
+            '-' +
+            language}"
         >
           <LanguageIcon {language} {theme} class="w-8 h-8" />
         </div>

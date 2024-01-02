@@ -1,7 +1,7 @@
 ---
 title: Svelte for beginners
 description: Simple tutorial to learn the basics of the Svelte framework
-banner: /postsAssets/Svelte-for-beginners.avif
+banner: /postsAssets/svelte-for-beginners.png
 date: '2023-06-21'
 languages:
   - SvelteKit

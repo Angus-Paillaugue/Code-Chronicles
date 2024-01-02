@@ -12,10 +12,7 @@
 </script>
 
 <svelte:head>
-  <title
-    >{$page.params.name}
-    | Code Chronicle</title
-  >
+  <title>{$page.params.name} | Code Chronicle</title>
 </svelte:head>
 
 <div class="max-w-screen-xl mx-auto w-full p-2 md:p-4 lg:p-6">
@@ -28,7 +25,7 @@
       class="grid gap-4"
       style="grid-template-rows: min-content;grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));"
     >
-      {#each posts as post}
+      {#each posts as post (post.id)}
         <Post {post} {theme} />
       {/each}
     </div>

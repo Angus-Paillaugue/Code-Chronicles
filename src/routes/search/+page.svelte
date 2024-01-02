@@ -24,7 +24,7 @@
       class="grid p-2 md:p-4 lg:p-6 gap-4"
       style="grid-template-rows: min-content;grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));"
     >
-      {#each posts as post}
+      {#each posts as post (post.id)}
         <Post {post} {theme} />
       {/each}
     </div>

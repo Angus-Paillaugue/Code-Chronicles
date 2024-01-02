@@ -17,8 +17,8 @@
     <h2 class="text-3xl font-bold sm:text-4xl">Start learning today!</h2>
 
     <p class="mt-4 text-gray-600">
-      On this blog, you will find all the ressources you need to be the greatest developer in the
-      world.
+      On this blog, you will find all the ressources you need to be the greatest
+      developer in the world.
     </p>
 
     <ButtonPrimary href="/categories">Get Started Today</ButtonPrimary>

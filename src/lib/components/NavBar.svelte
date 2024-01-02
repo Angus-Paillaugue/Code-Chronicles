@@ -66,7 +66,7 @@
       <button
         type="button"
         class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-black-primary"
-        on:click={() => (mobileNavBar = true)}
+        onclick={() => (mobileNavBar = true)}
       >
         <span class="sr-only">Open main menu</span>
         <svg
@@ -160,14 +160,17 @@
         </div>
       </div>
 
-      <a href="/categories/front-end" class="text-sm font-semibold leading-6 text-black-primary"
-        >Front-end</a
+      <a
+        href="/categories/front-end"
+        class="text-sm font-semibold leading-6 text-black-primary">Front-end</a
       >
-      <a href="/categories/back-end" class="text-sm font-semibold leading-6 text-black-primary"
-        >Back-end</a
+      <a
+        href="/categories/back-end"
+        class="text-sm font-semibold leading-6 text-black-primary">Back-end</a
       >
-      <a href="/categories/others" class="text-sm font-semibold leading-6 text-black-primary"
-        >Others</a
+      <a
+        href="/categories/others"
+        class="text-sm font-semibold leading-6 text-black-primary">Others</a
       >
     </div>
     <div class="max-lg:hidden flex-1 flex justify-end">
@@ -194,14 +197,19 @@
   {#if searchModal}
     <div
       class="z-30 realtive fixed top-20 right-0 left-0 bottom-0"
-      on:click={() => (searchModal = false)}
+      tabindex="-1"
+      onclick={() => (searchModal = false)}
       transition:fly={{
         y: 20,
         duration: 300,
         easing: quintOut,
       }}
     >
-      <div class="bg-white px-6 py-6 border-y border-border" role="dialog" aria-modal="true">
+      <div
+        class="bg-white px-6 py-6 border-y border-border"
+        role="dialog"
+        aria-modal="true"
+      >
         <form action="/search" method="GET" class="w-full relative">
           <Input name="query" placeholder="Search" />
 
@@ -235,7 +243,7 @@
   {#if mobileNavBar}
     <div
       class="fixed inset-0 z-30 bg-neutral-700/30"
-      on:click={() => (mobileNavBar = false)}
+      onclick={() => (mobileNavBar = false)}
       transition:fade={{
         duration: 200,
       }}
@@ -250,11 +258,14 @@
         duration: 500,
       }}
     >
-      <div class="flex items-center justify-end">
+      <div class="flex flex-row justify-between items-center">
+        <a href="/" class="rounded-full overflow-hidden"
+          ><img src="/square-logo.webp" class="h-[44px]" alt="" /></a
+        >
         <button
           type="button"
           class="-m-2.5 rounded-md p-2.5 text-gray-700"
-          on:click={() => (mobileNavBar = !mobileNavBar)}
+          onclick={() => (mobileNavBar = !mobileNavBar)}
         >
           <span class="sr-only">Close menu</span>
           <svg
@@ -265,7 +276,11 @@
             stroke="currentColor"
             aria-hidden="true"
           >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
       </div>
@@ -276,11 +291,12 @@
               <button
                 type="button"
                 class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-black-primary hover:bg-gray-50 group"
-                on:click={() => (navbarDropdown = !navbarDropdown)}
+                onclick={() => (navbarDropdown = !navbarDropdown)}
               >
                 Languages
                 <svg
-                  class="h-5 w-5 flex-none {navbarDropdown && 'rotate-180'} transition-all"
+                  class="h-5 w-5 flex-none {navbarDropdown &&
+                    'rotate-180'} transition-all"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                   aria-hidden="true"
@@ -323,7 +339,7 @@
             >
             <button
               class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-black-primary hover:bg-gray-50 w-full text-start"
-              on:click={() => {
+              onclick={() => {
                 mobileNavBar = false;
                 searchModal = true;
               }}>Search</button

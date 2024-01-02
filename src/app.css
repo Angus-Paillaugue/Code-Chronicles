@@ -137,7 +137,10 @@ ul {
 }
 /* Line numbers */
 .line-numbers-wrapper {
-  @apply text-sm font-normal text-neutral-500 dark:text-neutral-400 select-none flex flex-col absolute top-0 leading-[1.5rem] px-2 py-4 left-0 bottom-0 pointer-events-none;
+  @apply text-sm md:text-base font-normal text-neutral-500 dark:text-neutral-400 select-none flex flex-col justify-between absolute top-0 leading-[1.5rem] px-2 py-4 left-0 bottom-0 pointer-events-none;
+}
+.copy-code-button {
+  @apply w-10 h-10 bg-black-primary text-white rounded-full flex items-center justify-center absolute transition hover:scale-105 active:scale-90 focus:outline-none right-2 top-2;
 }
 code {
   @apply px-1 py-0.5 rounded-md text-base bg-black-primary text-gray-400 font-mono ligatures-normal text-shadow-code;
@@ -148,7 +151,7 @@ pre[class*='language-'] {
   -moz-tab-size: 2;
   -o-tab-size: 2;
   tab-size: 2;
-  @apply bg-neutral-800 text-gray-400 text-shadow-code font-mono ligatures-normal hyphens-none whitespace-pre-wrap text-left text-wrap p-0 max-md:text-sm leading-6 max-md:leading-6 max-md:whitespace-pre max-md:overflow-x-auto;
+  @apply bg-neutral-800 text-gray-400 text-shadow-code font-mono ligatures-normal hyphens-none whitespace-pre-wrap text-left text-wrap p-0 text-sm md:text-base leading-6 max-md:whitespace-pre max-md:overflow-x-auto relative;
 }
 
 /* Add styling to code blocks */
