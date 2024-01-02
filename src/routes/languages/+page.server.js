@@ -1,6 +1,6 @@
 import { allPosts } from '$lib/server/posts.js';
 
-export const load = async ({}) => {
+export const load = async ({  }) => {
   let posts = await allPosts();
 
   const postsByLanguage = {};

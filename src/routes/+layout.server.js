@@ -1,4 +1,4 @@
-import { allPosts } from '$lib/server/posts';
+import { allPosts } from '$lib/server/posts.js';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {

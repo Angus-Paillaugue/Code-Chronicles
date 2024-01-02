@@ -345,6 +345,6 @@
     class="p-4 border border-border overflow-hidden rounded-3xl"
     bind:this={article}
   >
-    <svelte:component this={data.component} />
+    <svelte:component this={data.post.component} />
   </article>
 </div>

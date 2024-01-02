@@ -1,5 +1,5 @@
 import { error, redirect } from '@sveltejs/kit';
-import { postById, postBySlug } from '$lib/server/posts';
+import { postById, postBySlug } from '$lib/server/posts.js';
 import { urlHealer } from '$lib/utils';
 
 export const load = async ({ params }) => {
@@ -22,8 +22,6 @@ export const load = async ({ params }) => {
     if (!post) throw error(404, 'Post not found');
   }
   
-  const component = await import(`$lib/posts/${identifier.slug}.md`);
-  console.log(component)
   // Redirect to the correct URL if the slug is incorrect or is missing the identifier
   const correctUrl = urlHealer.identifier.join(post.slug, post.id);
   if (urlName !== correctUrl)
@@ -31,6 +29,5 @@ export const load = async ({ params }) => {
 
   return {
     post,
-    component
   };
 };

@@ -1,4 +1,4 @@
-import { postsByLanguage } from '$lib/server/posts';
+import { postsByLanguage } from '$lib/server/posts.js';
 
 export const load = async ({ params }) => {
   const { name } = params;
