@@ -4,13 +4,13 @@ import { urlHealer } from '$lib/utils';
 
 export const load = async ({ params }) => {
   const urlName = urlHealer.sanitize(params.name);
-
+  
   // Isolate the identifier at the end of the URL
   const identifier = urlHealer.identifier.separate(urlName);
   if (!identifier) {
     throw error(404, 'Post not found');
   }
-
+  
   // Fetch the post by its identifier
   let post;
   if (identifier.id) {
@@ -21,7 +21,9 @@ export const load = async ({ params }) => {
     post = await postBySlug(identifier.slug);
     if (!post) throw error(404, 'Post not found');
   }
-
+  
+  const component = await import(`$lib/posts/${identifier.slug}.md`);
+  console.log(component)
   // Redirect to the correct URL if the slug is incorrect or is missing the identifier
   const correctUrl = urlHealer.identifier.join(post.slug, post.id);
   if (urlName !== correctUrl)
@@ -29,5 +31,6 @@ export const load = async ({ params }) => {
 
   return {
     post,
+    component
   };
 };
