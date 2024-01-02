@@ -27,6 +27,13 @@ import { writable } from 'svelte/store';
 // export const theme = storable("theme", 'light');
 export const toasts = writable([]);
 
+/**
+ * Creates a new toast notification.
+ * @param {Object} obj - The toast object.
+ * @param {string} obj.type - The type of the toast (green, red, gray).
+ * @param {string} [obj.title] - The title of the toast. If not provided, a default title will be used based on the type.
+ * @param {string} obj.message - The message of the toast.
+ */
 export function newToast(obj) {
   let { type, title, message } = obj;
   const baseToastTitles = {
@@ -57,6 +64,10 @@ export function newToast(obj) {
   }, 3000);
 }
 
+/**
+ * Removes a toast from the toasts array based on its index.
+ * @param {number} index - The index of the toast to be removed.
+ */
 export function removeToast(index) {
   toasts.update((oldToasts) => {
     oldToasts = oldToasts.filter((el) => el.index !== index);

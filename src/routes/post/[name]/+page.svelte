@@ -40,7 +40,7 @@
       );
       // Add styling to the side TOC items
       toc.querySelectorAll('li').forEach((el) => {
-        el.classList.add('m-0');
+        el.classList.add('m-0', 'w-fit');
       });
       toc.querySelectorAll('li>a').forEach((el) => {
         el.classList.add(
@@ -126,30 +126,45 @@
     // On scroll, highlight the current section in the side TOC
     onscroll = () => {
       scrollPos = window.scrollY + 96 + scrollOffset;
-      const sections = Array.from(article.querySelectorAll('h1,h2,h3,h4,h5,h6'));
+      setTOCPill();
+    };
+    setScreenRelatedValues();
+    setTOCPill();
+    onresize = setScreenRelatedValues;
+  });
 
-      for (let i in sections) {
-        const section = sections[i];
-        const rect = section.getBoundingClientRect();
-        const top = rect.top + window.scrollY;
-        if (top <= scrollPos) {
-          // sideTOC.querySelectorAll(".relative>ol>li>a").forEach((el) => {
-          //   el.classList.remove("underline");
-          //   el.classList.add("no-underline");
-          // });
-          const activeSectionLink = sideTOC.querySelector(`a[href='#${section.id}']`);
+  function setTOCPill() {
+    const sections = Array.from(article.querySelectorAll('h1,h2,h3,h4,h5,h6'));
 
-          // activeSectionLink.classList.remove("no-underline");
-          // activeSectionLink.classList.add("underline");
+    // For each section of the blog post
+    for (let i in sections) {
+      const section = sections[i];
+      // Get the section's position
+      const rect = section.getBoundingClientRect();
+      const top = rect.top + window.scrollY;
+      // If the section is the active one
+      if (top <= scrollPos && sections[Number(i) + 1]?.offsetTop > scrollPos) {
+        // Get the active section link in the side TOC
+        const activeSectionLink = sideTOC.querySelector(`a[href='#${section.id}']`);
+        // Get the active section link in the URL
+        const activeURLSection = window.location.href.split('#').at(-1);
+
+        // If the active section link in the URL is not the same as the active section link in the side TOC (user scrolled to a different section)
+        if (activeURLSection !== activeSectionLink.href.split('#').at(-1)) {
+          // Moving the pill background to the active section
           sideTOCPillBg.style.top = `${activeSectionLink.parentElement.offsetTop - 4}px`;
           sideTOCPillBg.style.width = `${activeSectionLink.offsetWidth + 8 * 2 + 24}px`;
           sideTOCPillBg.style.height = `${activeSectionLink.offsetHeight + 2 * 5}px`;
+          // Replace the URL hash with the current section ID
+          replaceState(window.location.href.split('#')[0] + '#' + section.id);
+          break;
         }
       }
-    };
-    setScreenRelatedValues();
-    onresize = setScreenRelatedValues;
-  });
+    }
+    // If the user scrolled to the top of the page (no active section), remove the URL hash
+    if (window.location.href.split('#').length === 2 && scrollPos < screenHeight)
+      replaceState(window.location.href.split('#')[0]);
+  }
 
   // Set the screen height and article height
   const setScreenRelatedValues = () => {
@@ -238,7 +253,7 @@
 <!-- Side Table Of Contents (TOC) -->
 
 <div
-  class="fixed top-1/2 -translate-y-1/2 right-0 z-10 rounded-l-3xl bg-white border border-border border-r-0 p-2 md:p-4 transition-all duration-500 {(
+  class="fixed top-1/2 -translate-y-1/2 right-0 z-10 rounded-l-3xl bg-white border border-border border-r-0 p-4 transition-all duration-500 {(
     scrollPos - screenHeight < 0 ? 0 : scrollPos - screenHeight
   )
     ? sideTOCHidden
@@ -246,6 +261,7 @@
       : 'lg:translate-x-0 max-w-[275px]'
     : 'lg:translate-x-full max-w-[calc(275px+48px)]'} max-lg:translate-x-full"
   bind:this={sideTOC}
+  style="direction: ltr;"
 >
   <button
     name="toggleTableOfContents"

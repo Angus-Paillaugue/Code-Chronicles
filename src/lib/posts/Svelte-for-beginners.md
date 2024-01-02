@@ -169,7 +169,7 @@ Because we need to assign a value for Svelte to pick it up methods like `push` w
 
 Sometimes you need to change a value based on other values. This is referred to as a **computed property**.
 
-Svelte has **reactive declarations** using the `$:`` syntax which is valid <Link href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label">JavaScript label syntax</Link> that Svelte stole for itself.
+Svelte has **reactive declarations** using the `$:` syntax which is valid <Link href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label">JavaScript label syntax</Link> that Svelte stole for itself.
 
 Using the `$:` syntax is saying “**re-run this code whenever any of the referenced values change**”.
 

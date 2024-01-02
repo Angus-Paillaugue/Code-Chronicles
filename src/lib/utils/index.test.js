@@ -1,7 +1,6 @@
 import { expect, test } from 'vitest';
 import { formatDate, urlHealer } from './index.js';
 
-
 // * formatDate
 test('formatDate should format a medium english date correctly', () => {
   const date = new Date(2024, 0, 1);
@@ -9,36 +8,36 @@ test('formatDate should format a medium english date correctly', () => {
 });
 test('formatDate should format a medium french date correctly', () => {
   const date = new Date(2024, 8, 14);
-  expect(formatDate(date, undefined, "fr")).toBe('14 sept. 2024');
+  expect(formatDate(date, undefined, 'fr')).toBe('14 sept. 2024');
 });
 test('formatDate should format a long english date correctly', () => {
   const date = new Date(2024, 6, 22);
-  expect(formatDate(date, "long", "en")).toBe('July 22, 2024');
+  expect(formatDate(date, 'long', 'en')).toBe('July 22, 2024');
 });
 
 // * urlHealer
 test('urlHealer.identifier.separate should separate id and slug correctly', () => {
-  const url1 = 'slug-123';
+  const url1 = 'slug-post-title-123';
   const result1 = urlHealer.identifier.separate(url1);
-  expect.soft(result1).toEqual({ id: 123, slug: 'slug' });
+  expect.soft(result1).toEqual({ id: 123, slug: 'slug-post-title' });
 
-  const url2 = 'slug123';
+  const url2 = 'slug-post-title123';
   const result2 = urlHealer.identifier.separate(url2);
-  expect.soft(result2).toEqual({ id: 123, slug: 'slug' });
+  expect.soft(result2).toEqual({ id: 123, slug: 'slug-post-title' });
 
-  const url3 = 'slug---123';
+  const url3 = 'slug-post--title---123';
   const result3 = urlHealer.identifier.separate(url3);
-  expect.soft(result3).toEqual({ id: 123, slug: 'slug' });
+  expect.soft(result3).toEqual({ id: 123, slug: 'slug-post-title' });
 
   const url4 = '123';
   const result4 = urlHealer.identifier.separate(url4);
   expect.soft(result4).toEqual({ id: 123, slug: '' });
 });
 test('urlHealer.identifier.join should join slug and id correctly', () => {
-  const slug = 'slug';
+  const slug = 'slug-post-title';
   const id = '123';
   const result = urlHealer.identifier.join(slug, id);
-  expect(result).toBe("slug-123");
+  expect(result).toBe('slug-post-title-123');
 });
 test('urlHealer.sanitize should sanitize url correctly', () => {
   const url1 = 'Some URL With Spaces';

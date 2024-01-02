@@ -28,7 +28,8 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-neutral-500;
 }
-::selection {
+::selection,
+::-moz-selection {
   @apply text-white bg-black-primary;
 }
 
@@ -52,7 +53,7 @@ h6 {
 }
 p,
 li {
-  @apply font-['Mulish'] text-lg font-medium leading-6 mb-4;
+  @apply font-['Mulish'] text-lg font-medium leading-6 mb-4 text-wrap-none;
 }
 p.balance {
   @apply text-wrap-balance;
@@ -106,8 +107,11 @@ h5.article-heading {
 h6.article-heading {
   @apply text-base font-bold mb-4;
 }
-p.article-text:not(:last-child) {
-  @apply mb-4 font-normal text-lg leading-8;
+p.article-text {
+  @apply mb-4 font-normal text-lg leading-8 text-wrap-none;
+}
+p.article-text:last-child {
+  @apply mb-0;
 }
 p.article-text + .article-heading {
   @apply mt-10;

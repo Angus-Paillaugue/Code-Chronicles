@@ -18,7 +18,7 @@ export const load = async ({ params }) => {
   }
   // If the identifier is a slug, fetch the post by its slug
   if (!post) {
-    post = await postBySlug(urlName);
+    post = await postBySlug(identifier.slug);
     if (!post) throw error(404, 'Post not found');
   }
 

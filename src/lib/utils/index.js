@@ -34,8 +34,8 @@ export const urlHealer = {
         .filter((e) => e);
 
       return {
-        id:Number(id),
-        slug: rest.reverse().join('-'),
+        id: Number(id),
+        slug: rest.join('-'),
       };
     },
     /**
