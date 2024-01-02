@@ -13,6 +13,12 @@
 
 <svelte:head>
   <title>{$page.params.name} | Code Chronicle</title>
+  <meta property="og:title" content="{$page.params.name} | Code Chronicle" />
+  <meta property="twitter:title" content="{$page.params.name} | Code Chronicle" />
+
+  <meta name="description" content="All the blog posts in the {$page.params.name} category">
+  <meta property="og:description" content="All the blog posts in the {$page.params.name} category" />
+  <meta property="twitter:description" content="All the blog posts in the {$page.params.name} category" />
 </svelte:head>
 
 <div class="max-w-screen-xl mx-auto w-full p-2 md:p-4 lg:p-6">

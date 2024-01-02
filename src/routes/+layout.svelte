@@ -4,7 +4,7 @@
   import { gsap } from 'gsap/dist/gsap';
   import { Flip } from 'gsap/dist/Flip';
   import { CookieModal, Footer, NavBar, Toasts } from '$lib/components';
-  import { toasts } from '$lib/stores';
+  import { page } from '$app/stores';
 
   gsap.registerPlugin(Flip);
   let state = $state();
@@ -22,6 +22,16 @@
     });
   });
 </script>
+
+<svelte:head>
+  <meta property="twitter:domain" content={$page.url.hostname}>
+  <meta property="twitter:url" content={$page.url.href}>
+  
+  <meta property="og:url" content={$page.url.href} />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Code Chronicles" />
+</svelte:head>
+
 
 <!-- Toasts -->
 <Toasts />

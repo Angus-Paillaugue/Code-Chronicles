@@ -8,6 +8,12 @@
 
 <svelte:head>
   <title>Home | Code Chronicle</title>
+  <meta property="og:title" content="Home | Code Chronicle" />
+  <meta property="twitter:title" content="Home | Code Chronicle" />
+
+  <meta name="description" content="On this blog, you will find all the ressources you need to be the greatest developer in the world.">
+  <meta property="og:description" content="On this blog, you will find all the ressources you need to be the greatest developer in the world." />
+  <meta property="twitter:description" content="On this blog, you will find all the ressources you need to be the greatest developer in the world." />
 </svelte:head>
 
 <section

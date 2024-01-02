@@ -215,16 +215,15 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content={post.title + "| Code Chronicle"} />
   <meta property="og:description" content={post.description} />
-  <meta property="og:url" content={$page.url.href} />
-  <meta property="og:image" content={$page.url.origin + "/" + post.banner} />
+  <meta property="og:image" content={$page.url.origin + post.banner} />
+  <meta property="og:image:type" content={"image/" + post.banner.split(".").at(-1)} />
+  <meta property="article:published_time" content="{new Date(post.date).toISOString()}" />
 
   <!-- Twitter / X tags -->
-  <meta property="twitter:description" content={post.description} />
   <meta property="twitter:title" content={post.title + "| Code Chronicle"} />
-  <meta property="twitter:image" content={$page.url.origin + "/" + post.banner} />
+  <meta property="twitter:description" content={post.description} />
+  <meta property="twitter:image" content={$page.url.origin + post.banner} />
   <meta property="twitter:card" content="summary" />
-  <meta property="twitter:domain" content={$page.url.hostname}>
-  <meta property="twitter:url" content={$page.url.href}>
 </svelte:head>
 
 {#if scrollPos > screenHeight}

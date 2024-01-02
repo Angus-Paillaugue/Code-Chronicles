@@ -59,7 +59,7 @@
   <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
     <div class="flex lg:flex-1">
       <a href="/" class="-m-1.5 p-1.5">
-        <img class="h-8 w-auto" src="/logo-rectangular.webp" alt="" />
+        <img class="h-8 w-auto" src="/logo-rectangular.webp" alt="Code Chronicle logo" />
       </a>
     </div>
     <div class="flex lg:hidden">
@@ -260,7 +260,7 @@
     >
       <div class="flex flex-row justify-between items-center">
         <a href="/" class="rounded-full overflow-hidden"
-          ><img src="/square-logo.webp" class="h-[44px]" alt="" /></a
+          ><img src="/square-logo.webp" class="h-[44px]" alt="Code Chronicle logo" /></a
         >
         <button
           type="button"

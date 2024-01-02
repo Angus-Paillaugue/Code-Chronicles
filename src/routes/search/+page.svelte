@@ -13,6 +13,12 @@
 
 <svelte:head>
   <title>{$page.url.searchParams.get('query')} | Code Chronicle</title>
+  <meta property="og:title" content="{$page.url.searchParams.get('query')} | Code Chronicle" />
+  <meta property="twitter:title" content="{$page.url.searchParams.get('query')} | Code Chronicle" />
+
+  <meta name="description" content="Searching blog posts matching '{$page.url.searchParams.get('query')}'">
+  <meta property="og:description" content="Searching blog posts matching '{$page.url.searchParams.get('query')}'" />
+  <meta property="twitter:description" content="Searching blog posts matching '{$page.url.searchParams.get('query')}'" />
 </svelte:head>
 
 <div class="max-w-screen-xl mx-auto w-full">
