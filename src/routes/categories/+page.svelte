@@ -1,32 +1,9 @@
 <script>
   import { Post } from '$lib/components/';
-  //   import Input from "$lib/components/Input.svelte";
 
   const { data } = $props();
   let posts = $state(data.posts);
-  //   let searchInputValue = $state("");
   const theme = 'light';
-
-  //   $effect(() => {
-  //     const tolerance = 0;
-  //     // Filter the posts based on searchInputValue
-  //     posts = Object.fromEntries(
-  //       Object.entries(data.posts).filter(([category, _]) => {
-  //         const categoryLowerCase = category.toLowerCase();
-  //         const searchInputValueLowerCase = searchInputValue.toLowerCase();
-  //         let mismatchCount = 0;
-
-  //         for (let i = 0; i < searchInputValueLowerCase.length; i++) {
-  //           if (categoryLowerCase[i] !== searchInputValueLowerCase[i])
-  //             mismatchCount++;
-
-  //           if (mismatchCount > tolerance) return false;
-  //         }
-
-  //         return true;
-  //       })
-  //     );
-  //   });
 </script>
 
 <svelte:head>
@@ -34,12 +11,6 @@
 </svelte:head>
 
 <div class="max-w-screen-xl mx-auto w-full p-2 md:p-4 lg:p-6">
-  <!-- <Input
-    placeholder="Search for categories"
-    name="searchForCategories"
-    class="mb-6"
-    bind:value={searchInputValue}
-  /> -->
   {#each Object.entries(posts) as [category, postsInCategory]}
     <div class="pb-2 md:pb-4 lg:pb-6">
       <h2>

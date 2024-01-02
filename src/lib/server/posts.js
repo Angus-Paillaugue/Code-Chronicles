@@ -11,7 +11,7 @@ export function allPosts() {
 
   for (const path in paths) {
     const file = paths[path];
-    const slug = path.split('/').at(-1)?.replace('.md', '');
+    const slug = path.split('/').at(-1)?.replace('.md', '').toLowerCase();
 
     if (file && typeof file === 'object' && 'metadata' in file && slug) {
       const post = {
@@ -23,7 +23,8 @@ export function allPosts() {
   }
 
   posts = posts.sort(
-    (first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
+    (first, second) =>
+      new Date(second.date).getTime() - new Date(first.date).getTime()
   );
   posts = posts.map((post, index) => ({
     ...post,
@@ -40,7 +41,7 @@ export function allPosts() {
  */
 export async function postBySlug(slug) {
   const posts = allPosts();
-  return posts.find((post) => post.slug == slug);
+  return posts.find((post) => post.slug == slug.toLowerCase());
 }
 
 /**
@@ -60,7 +61,11 @@ export function postById(id) {
  */
 export function postsByLanguage(language) {
   const posts = allPosts();
-  return posts.filter((post) => post.languages.includes(language));
+  return posts.filter((post) =>
+    post.languages
+      .map((el) => el.toLowerCase())
+      .includes(language.toLowerCase())
+  );
 }
 
 /**
@@ -70,7 +75,11 @@ export function postsByLanguage(language) {
  */
 export function postsByCategory(category) {
   const posts = allPosts();
-  return posts.filter((post) => post.categories.includes(category));
+  return posts.filter((post) =>
+    post.categories
+      .map((el) => el.toLowerCase())
+      .includes(category.toLowerCase())
+  );
 }
 
 /**
@@ -107,7 +116,8 @@ export function searchPosts(query) {
     const { title, languages, categories } = post;
     const postTitle = title.toLowerCase();
 
-    if (languages.includes(searchQuery) || categories.includes(searchQuery)) return true;
+    if (languages.includes(searchQuery) || categories.includes(searchQuery))
+      return true;
     if (calculateTolerance(postTitle, searchQuery)) return true;
 
     return false;

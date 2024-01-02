@@ -143,21 +143,23 @@
       const rect = section.getBoundingClientRect();
       const top = rect.top + window.scrollY;
       // If the section is the active one
-      if (top <= scrollPos && sections[Number(i) + 1]?.offsetTop > scrollPos) {
-        // Get the active section link in the side TOC
-        const activeSectionLink = sideTOC.querySelector(`a[href='#${section.id}']`);
-        // Get the active section link in the URL
-        const activeURLSection = window.location.href.split('#').at(-1);
-
-        // If the active section link in the URL is not the same as the active section link in the side TOC (user scrolled to a different section)
-        if (activeURLSection !== activeSectionLink.href.split('#').at(-1)) {
-          // Moving the pill background to the active section
-          sideTOCPillBg.style.top = `${activeSectionLink.parentElement.offsetTop - 4}px`;
-          sideTOCPillBg.style.width = `${activeSectionLink.offsetWidth + 8 * 2 + 24}px`;
-          sideTOCPillBg.style.height = `${activeSectionLink.offsetHeight + 2 * 5}px`;
-          // Replace the URL hash with the current section ID
-          replaceState(window.location.href.split('#')[0] + '#' + section.id);
-          break;
+      if (top <= scrollPos) {
+        if((Number(i) < sections.length-1 && sections[Number(i) + 1]?.offsetTop > scrollPos) || Number(i) === sections.length-1){
+          // Get the active section link in the side TOC
+          const activeSectionLink = sideTOC.querySelector(`a[href='#${section.id}']`);
+          // Get the active section link in the URL
+          const activeURLSection = window.location.href.split('#').at(-1);
+  
+          // If the active section link in the URL is not the same as the active section link in the side TOC (user scrolled to a different section)
+          if (activeURLSection !== activeSectionLink.href.split('#').at(-1)) {
+            // Moving the pill background to the active section
+            sideTOCPillBg.style.top = `${activeSectionLink.parentElement.offsetTop - 4}px`;
+            sideTOCPillBg.style.width = `${activeSectionLink.parentElement.offsetWidth + 8 * 2}px`;
+            sideTOCPillBg.style.height = `${activeSectionLink.offsetHeight + 2 * 5}px`;
+            // Replace the URL hash with the current section ID
+            replaceState(window.location.href.split('#')[0] + '#' + section.id);
+            break;
+          }
         }
       }
     }
@@ -266,7 +268,7 @@
   <button
     name="toggleTableOfContents"
     onclick={() => (sideTOCHidden = !sideTOCHidden)}
-    class="w-10 h-10 flex flex-col items-center justify-center hover:bg-neutral-100 transition-all rounded-full"
+    class="w-10 h-10 flex flex-col items-center justify-center bg-neutral-100 hover:bg-neutral-200 transition-all rounded-full mb-2"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -274,7 +276,7 @@
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      class="w-6 h-6 transition-all {sideTOCHidden && 'rotate-180'}"
+      class="w-6 h-6 transition-all duration-500 {sideTOCHidden && 'rotate-180'}"
     >
       <path
         stroke-linecap="round"
@@ -286,7 +288,7 @@
   <div class="w-full h-full relative">
     <!-- Pill background -->
     <span
-      class="absolute -z-10 bg-border transition-all ease-linear -left-2 rounded-full"
+      class="absolute -z-10 bg-neutral-200 transition-all ease-linear -left-2 rounded-full"
       bind:this={sideTOCPillBg}
     ></span>
   </div>

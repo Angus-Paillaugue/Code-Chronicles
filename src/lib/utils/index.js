@@ -27,7 +27,7 @@ export const urlHealer = {
   identifier: {
     separate: (url) => {
       const regex = /(\d+)$/;
-      const [_, id] = url.match(regex) || [];
+      const [, id] = url.match(regex) || [];
       const rest = url
         .replace(regex, '')
         .split('-')

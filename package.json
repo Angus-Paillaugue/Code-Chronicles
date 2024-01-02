@@ -19,8 +19,8 @@
     "@vitest/coverage-v8": "^1.1.1",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.56.0",
-    "eslint-plugin-svelte": "^2.35.1",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-svelte": "^2.35.1",
     "jsdom": "^23.0.1",
     "postcss": "^8.4.32",
     "prettier": "^3.1.1",
@@ -36,9 +36,13 @@
   "dependencies": {
     "@svelte-dev/pretty-code": "^1.0.0",
     "@sveltejs/adapter-vercel": "^4.0.3",
+    "get-urls": "^12.1.0",
     "gsap": "^3.12.4",
     "mdsvex": "^0.11.0",
     "mongodb": "^6.3.0",
+    "puppeteer": "^21.6.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "rehype-slug": "^6.0.0",
     "remark-flexible-code-titles": "^1.1.4",
     "remark-unwrap-images": "^4.0.0"

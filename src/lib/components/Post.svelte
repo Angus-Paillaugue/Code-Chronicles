@@ -1,11 +1,12 @@
 <script>
   import { formatDate } from '$lib/utils';
+  import { urlHealer } from "$lib/utils";
   import LanguageIcon from './LanguageIcon.svelte';
 
   const { post, theme } = $props();
 </script>
 
-<a href="/post/{post.slug}" class="relative overflow-hidden rounded-lg shadow group">
+<a href="/post/{urlHealer.identifier.join(post.slug, post.id)}" class="relative overflow-hidden rounded-lg shadow group">
   <img
     src={post.banner}
     alt="Article cover"
