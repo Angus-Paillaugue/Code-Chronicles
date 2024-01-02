@@ -6,6 +6,6 @@ export { default as Footer } from './Footer.svelte';
 export { default as NavBar } from './NavBar.svelte';
 export { default as CookieModal } from './CookieModal.svelte';
 export { default as Post } from './Post.svelte';
-export { default as Toast } from './Toast.svelte';
+export { default as Toasts } from './Toasts.svelte';
 export { default as Input } from './Input.svelte';
 export { default as LanguageIcon } from './LanguageIcon.svelte';

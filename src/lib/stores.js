@@ -26,6 +26,8 @@ import { writable } from 'svelte/store';
 
 // export const theme = storable("theme", 'light');
 export const toasts = writable([]);
+const generateId = () =>
+  Date.now().toString() + Math.floor(Math.random() * 10000).toString();
 
 /**
  * Creates a new toast notification.
@@ -36,41 +38,34 @@ export const toasts = writable([]);
  */
 export function newToast(obj) {
   let { type, title, message } = obj;
+
   const baseToastTitles = {
     green: 'Success',
     red: 'Error',
     gray: 'Info',
   };
-  title = title || baseToastTitles[type];
   const newToast = {
-    type,
-    title,
+    type: type || 'gray',
+    title: title || baseToastTitles[type],
     message,
-    index: 0,
+    id: generateId(),
   };
+  // Add the new toast to the beginning of toasts the array.
   toasts.update((oldToast) => {
-    newToast.index = oldToast.length;
-    oldToast = [...oldToast, newToast];
-    oldToast = oldToast.sort((a, b) => a.index - b.index);
+    oldToast = [newToast, ...oldToast];
     return oldToast;
   });
 
+  // Remove the toast after 5 seconds.
   setTimeout(() => {
-    toasts.update((oldToasts) => {
-      oldToasts = oldToasts.filter((toast) => toast !== newToast);
-      oldToasts = oldToasts.sort((a, b) => a.index - b.index);
-      return oldToasts;
-    });
-  }, 3000);
+    removeToast(newToast.id);
+  }, 5000);
 }
 
 /**
- * Removes a toast from the toasts array based on its index.
- * @param {number} index - The index of the toast to be removed.
+ * Removes a toast from the toasts array based on its id.
+ * @param {number} id - The id of the toast to be removed.
  */
-export function removeToast(index) {
-  toasts.update((oldToasts) => {
-    oldToasts = oldToasts.filter((el) => el.index !== index);
-    return oldToasts;
-  });
+export function removeToast(id) {
+  toasts.update((all) => all.filter((t) => t.id !== id));
 }
