@@ -6,6 +6,7 @@
   import { fly } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
   import LanguageIcon from '$lib/components/LanguageIcon.svelte';
+  import { page } from '$app/stores';
 
   const { data } = $props();
   const { post } = data;
@@ -144,18 +145,30 @@
       const top = rect.top + window.scrollY;
       // If the section is the active one
       if (top <= scrollPos) {
-        if((Number(i) < sections.length-1 && sections[Number(i) + 1]?.offsetTop > scrollPos) || Number(i) === sections.length-1){
+        if (
+          (Number(i) < sections.length - 1 &&
+            sections[Number(i) + 1]?.offsetTop > scrollPos) ||
+          Number(i) === sections.length - 1
+        ) {
           // Get the active section link in the side TOC
-          const activeSectionLink = sideTOC.querySelector(`a[href='#${section.id}']`);
+          const activeSectionLink = sideTOC.querySelector(
+            `a[href='#${section.id}']`
+          );
           // Get the active section link in the URL
           const activeURLSection = window.location.href.split('#').at(-1);
-  
+
           // If the active section link in the URL is not the same as the active section link in the side TOC (user scrolled to a different section)
           if (activeURLSection !== activeSectionLink.href.split('#').at(-1)) {
             // Moving the pill background to the active section
-            sideTOCPillBg.style.top = `${activeSectionLink.parentElement.offsetTop - 4}px`;
-            sideTOCPillBg.style.width = `${activeSectionLink.parentElement.offsetWidth + 8 * 2}px`;
-            sideTOCPillBg.style.height = `${activeSectionLink.offsetHeight + 2 * 5}px`;
+            sideTOCPillBg.style.top = `${
+              activeSectionLink.parentElement.offsetTop - 4
+            }px`;
+            sideTOCPillBg.style.width = `${
+              activeSectionLink.parentElement.offsetWidth + 8 * 2
+            }px`;
+            sideTOCPillBg.style.height = `${
+              activeSectionLink.offsetHeight + 2 * 5
+            }px`;
             // Replace the URL hash with the current section ID
             replaceState(window.location.href.split('#')[0] + '#' + section.id);
             break;
@@ -164,7 +177,10 @@
       }
     }
     // If the user scrolled to the top of the page (no active section), remove the URL hash
-    if (window.location.href.split('#').length === 2 && scrollPos < screenHeight)
+    if (
+      window.location.href.split('#').length === 2 &&
+      scrollPos < screenHeight
+    )
       replaceState(window.location.href.split('#')[0]);
   }
 
@@ -194,6 +210,14 @@
   <title>{post.title}</title>
   <meta property="og:type" content="article" />
   <meta property="og:title" content={post.title} />
+  <meta property="description" content={post.description} />
+  <meta property="og:description" content={post.description} />
+  <meta property="og:url" content={$page.url.href} />
+  <meta property="og:image" content={post.banner} />
+  <meta property="twitter:description" content={post.description} />
+  <meta property="twitter:title" content={post.title} />
+  <meta property="twitter:image" content={post.banner} />
+  <meta property="twitter:card" content="summary" />
 </svelte:head>
 
 {#if scrollPos > screenHeight}
@@ -276,7 +300,8 @@
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      class="w-6 h-6 transition-all duration-500 {sideTOCHidden && 'rotate-180'}"
+      class="w-6 h-6 transition-all duration-500 {sideTOCHidden &&
+        'rotate-180'}"
     >
       <path
         stroke-linecap="round"

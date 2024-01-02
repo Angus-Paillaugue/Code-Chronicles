@@ -5,7 +5,7 @@
 export function allPosts() {
   let posts = [];
 
-  const paths = import.meta.glob('/src/lib/posts/*.md', {
+  const paths = import.meta.glob('/src/posts/*.md', {
     eager: true,
   });
 
