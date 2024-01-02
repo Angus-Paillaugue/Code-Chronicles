@@ -1,9 +1,11 @@
-import { error } from '@sveltejs/kit';
+// import { error } from '@sveltejs/kit';
 
 export async function load({ data }) {
   const paths = import.meta.glob('$lib/posts/*.md', {
     eager: true,
   });
+
+  console.log(paths)
 
   const post = Object.entries(paths)
     .map(([key, val]) => {
@@ -16,12 +18,13 @@ export async function load({ data }) {
       }
     })
     .filter((e) => e)[0];
-    
-  if (post)
+
+  // if (post)
     return {
       ...data,
       post,
+      paths
     };
 
-  throw new error(404, `Post not found !`);
+  // throw new error(404, `Post not found !`);
 }

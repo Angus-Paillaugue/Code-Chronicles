@@ -17,7 +17,7 @@
   let sideTOC = $state();
   let sideTOCHidden = $state(false);
   let sideTOCPillBg = $state();
-
+  console.log(data.paths)
   onMount(() => {
     if (article.querySelector('ol:first-child')) {
       // Add padding recursively to nested sections (ex: 1.1, 4.2.1, etc.)
