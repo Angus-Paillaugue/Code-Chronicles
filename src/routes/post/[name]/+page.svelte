@@ -207,17 +207,24 @@
 
 <!-- SEO -->
 <svelte:head>
-  <title>{post.title}</title>
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content={post.title} />
+  <!-- Normal tags -->
+  <title>{post.title} | Code-Chronicles</title>
   <meta property="description" content={post.description} />
+
+  <!-- Open Graph tags -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content={post.title + "| Code Chronicle"} />
   <meta property="og:description" content={post.description} />
   <meta property="og:url" content={$page.url.href} />
-  <meta property="og:image" content={post.banner} />
+  <meta property="og:image" content={$page.url.origin + "/" + post.banner} />
+
+  <!-- Twitter / X tags -->
   <meta property="twitter:description" content={post.description} />
-  <meta property="twitter:title" content={post.title} />
-  <meta property="twitter:image" content={post.banner} />
+  <meta property="twitter:title" content={post.title + "| Code Chronicle"} />
+  <meta property="twitter:image" content={$page.url.origin + "/" + post.banner} />
   <meta property="twitter:card" content="summary" />
+  <meta property="twitter:domain" content={$page.url.hostname}>
+  <meta property="twitter:url" content={$page.url.href}>
 </svelte:head>
 
 {#if scrollPos > screenHeight}
