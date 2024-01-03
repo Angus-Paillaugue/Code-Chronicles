@@ -17,7 +17,8 @@
         let mismatchCount = 0;
 
         for (let i = 0; i < searchInputValueLowerCase.length; i++) {
-          if (categoryLowerCase[i] !== searchInputValueLowerCase[i]) mismatchCount++;
+          if (categoryLowerCase[i] !== searchInputValueLowerCase[i])
+            mismatchCount++;
 
           if (mismatchCount > tolerance) return false;
         }
@@ -33,9 +34,18 @@
   <meta property="og:title" content="Languages | Code Chronicle" />
   <meta property="twitter:title" content="Languages | Code Chronicle" />
 
-  <meta name="description" content="All the blog posts sorted by languages used">
-  <meta property="og:description" content="All the blog posts sorted by languages used" />
-  <meta property="twitter:description" content="All the blog posts sorted by languages used" />
+  <meta
+    name="description"
+    content="All the blog posts sorted by languages used"
+  />
+  <meta
+    property="og:description"
+    content="All the blog posts sorted by languages used"
+  />
+  <meta
+    property="twitter:description"
+    content="All the blog posts sorted by languages used"
+  />
 </svelte:head>
 
 <div class="max-w-screen-xl mx-auto w-full p-2 md:p-4 lg:p-6">

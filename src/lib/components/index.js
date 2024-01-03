@@ -9,3 +9,4 @@ export { default as Post } from './Post.svelte';
 export { default as Toasts } from './Toasts.svelte';
 export { default as Input } from './Input.svelte';
 export { default as LanguageIcon } from './LanguageIcon.svelte';
+export { default as Slider } from './Slider.svelte';

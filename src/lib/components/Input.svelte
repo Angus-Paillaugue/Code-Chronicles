@@ -1,7 +1,13 @@
 <script>
   import { twMerge } from 'tailwind-merge';
 
-  let { name, class: extraClasses, placeholder, value, ...restProps } = $props();
+  let {
+    name,
+    class: extraClasses,
+    placeholder,
+    value,
+    ...restProps
+  } = $props();
 
   let classes = twMerge(
     'relative block rounded-md border border-gray-200 shadow-sm focus-within:border-black-primary focus-within:ring-1 focus-within:ring-black-primary',

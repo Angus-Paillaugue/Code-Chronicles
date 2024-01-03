@@ -14,6 +14,22 @@ export function formatDate(date, dateStyle = 'medium', locales = 'en') {
 }
 
 /**
+ * Shuffles an array in place using the Fisher-Yates algorithm.
+ * @param {Array} a - The array to be shuffled.
+ * @returns {Array} - The shuffled array.
+ */
+export function shuffle(a) {
+  let j, x, i;
+  for (i = a.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
+  }
+  return a;
+}
+
+/**
  * A collection of utility functions for working with URLs.
  */
 export const urlHealer = {

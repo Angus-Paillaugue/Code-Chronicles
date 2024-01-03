@@ -8,9 +8,18 @@
   <meta property="og:title" content="{$page.status} | Code Chronicle" />
   <meta property="twitter:title" content="{$page.status} | Code Chronicle" />
 
-  <meta name="description" content="A {$page.status} error occurred : {$page.error.message}">
-  <meta property="og:description" content="A {$page.status} error occurred : {$page.error.message}" />
-  <meta property="twitter:description" content="A {$page.status} error occurred : {$page.error.message}" />
+  <meta
+    name="description"
+    content="A {$page.status} error occurred : {$page.error.message}"
+  />
+  <meta
+    property="og:description"
+    content="A {$page.status} error occurred : {$page.error.message}"
+  />
+  <meta
+    property="twitter:description"
+    content="A {$page.status} error occurred : {$page.error.message}"
+  />
 </svelte:head>
 
 <div class="grid grow place-content-center bg-white px-4">

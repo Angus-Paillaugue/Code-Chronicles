@@ -1,12 +1,15 @@
 <script>
   import { formatDate } from '$lib/utils';
-  import { urlHealer } from "$lib/utils";
+  import { urlHealer } from '$lib/utils';
   import LanguageIcon from './LanguageIcon.svelte';
 
   const { post, theme } = $props();
 </script>
 
-<a href="/post/{urlHealer.identifier.join(post.slug, post.id)}" class="relative overflow-hidden rounded-lg shadow group">
+<a
+  href="/post/{urlHealer.identifier.join(post.slug, post.id)}"
+  class="relative overflow-hidden rounded-lg shadow group"
+>
   <img
     src={post.banner}
     alt="Article cover"
@@ -17,7 +20,9 @@
   <div
     class="transition-all bg-gradient-to-t from-gray-900/50 to-gray-900/25 absolute inset-0 group-hover:bg-black-primary/60"
   ></div>
-  <div class="relative px-4 pb-4 sm:pb-6 sm:px-6 pt-32 h-full flex flex-col justify-end">
+  <div
+    class="relative px-4 pb-4 sm:pb-6 sm:px-6 pt-32 h-full flex flex-col justify-end"
+  >
     <time
       datetime={new Date(post.date).toLocaleDateString()}
       class="block text-xs text-white/90 post-date"
@@ -35,7 +40,10 @@
     <p class="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
       {post.description}
     </p>
-    <div class="grid gap-2" style="grid-template-columns: repeat(auto-fill, 2rem);">
+    <div
+      class="grid gap-2"
+      style="grid-template-columns: repeat(auto-fill, 2rem);"
+    >
       {#each post.languages as language}
         <div
           data-tooltip={language}

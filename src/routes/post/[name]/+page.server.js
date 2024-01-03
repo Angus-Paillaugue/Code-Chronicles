@@ -25,7 +25,10 @@ export const load = async ({ params }) => {
   // Redirect to the correct URL if the slug is incorrect or is missing the identifier
   const correctUrl = urlHealer.identifier.join(post.slug, post.id);
   if (urlName !== correctUrl)
-    throw redirect(307, `/post/${urlHealer.identifier.join(post.slug, post.id)}`);
+    throw redirect(
+      307,
+      `/post/${urlHealer.identifier.join(post.slug, post.id)}`
+    );
 
   return {
     post,

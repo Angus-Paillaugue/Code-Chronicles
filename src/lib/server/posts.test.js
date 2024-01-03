@@ -51,7 +51,9 @@ test('postsByLanguage should return an empty array of posts with the given langu
 test('postsByCategory should return the right posts', () => {
   const category1 = 'front-end';
   const posts1 = postsByCategory(category1);
-  expect.soft(posts1.every((post) => post.categories.includes(category1))).toBe(true);
+  expect
+    .soft(posts1.every((post) => post.categories.includes(category1)))
+    .toBe(true);
 
   const category2 = 'non-existing-category';
   const posts2 = postsByCategory(category2);

@@ -1,14 +1,12 @@
 <script>
-  import { twMerge } from 'tailwind-merge';
   import { removeToast } from '$lib/stores';
   import { fly } from 'svelte/transition';
   import { flip } from 'svelte/animate';
-  import { quintOut } from 'svelte/easing';
   import { toasts } from '$lib/stores';
 
   // const baseToastClasses = 'rounded border-l-4 p-4 relative';
   const baseToastClasses =
-    'rounded-lg border bg-white border-border p-4 relative text-neutral-600';
+    'rounded-xl border bg-white border-border p-4 relative text-neutral-600';
   const svgColors = {
     red: 'text-red-600',
     green: 'text-green-600',
@@ -60,7 +58,10 @@
       <p class="mt-2 text-sm">
         {@html toast.message}
       </p>
-      <button class="absolute top-2 right-2" on:click={() => removeToast(toast.id)}>
+      <button
+        class="absolute top-2 right-2"
+        on:click={() => removeToast(toast.id)}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

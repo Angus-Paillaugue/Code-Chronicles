@@ -59,13 +59,18 @@
   <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
     <div class="flex lg:flex-1">
       <a href="/" class="-m-1.5 p-1.5">
-        <img class="h-8 w-auto" src="/logo-rectangular.webp" alt="Code Chronicle logo" />
+        <img
+          class="h-8 w-auto"
+          src="/logo-rectangular.webp"
+          alt="Code Chronicle logo"
+        />
       </a>
     </div>
     <div class="flex lg:hidden">
       <button
         type="button"
-        class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-black-primary"
+        class="-m-2 inline-flex items-center justify-center rounded-full hover:bg-neutral-100 transition-all p-2 text-black-primary"
+        name="mobile-menu"
         onclick={() => (mobileNavBar = true)}
       >
         <span class="sr-only">Open main menu</span>
@@ -90,6 +95,7 @@
         <button
           type="button"
           class="flex items-center gap-x-1 text-sm font-semibold leading-6 peer text-black-primary"
+          name="open-dropdown"
         >
           Languages
           <svg
@@ -174,7 +180,7 @@
       >
     </div>
     <div class="max-lg:hidden flex-1 flex justify-end">
-      <button on:click={() => (searchModal = !searchModal)}>
+      <button onclick={() => (searchModal = !searchModal)} name="open-search">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -214,7 +220,11 @@
           <Input name="query" placeholder="Search" />
 
           <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
-            <button type="submit" class="text-gray-600 hover:text-gray-700">
+            <button
+              type="submit"
+              name="search"
+              class="text-gray-600 hover:text-gray-700"
+            >
               <span class="sr-only">Search</span>
 
               <svg
@@ -260,11 +270,16 @@
     >
       <div class="flex flex-row justify-between items-center">
         <a href="/" class="rounded-full overflow-hidden"
-          ><img src="/square-logo.webp" class="h-[44px]" alt="Code Chronicle logo" /></a
+          ><img
+            src="/square-logo.webp"
+            class="h-[44px]"
+            alt="Code Chronicle logo"
+          /></a
         >
         <button
           type="button"
-          class="-m-2.5 rounded-md p-2.5 text-gray-700"
+          name="close-mobile-menu"
+          class="-m-2 rounded-full hover:bg-neutral-100 transition-all p-2 text-gray-700"
           onclick={() => (mobileNavBar = !mobileNavBar)}
         >
           <span class="sr-only">Close menu</span>
@@ -291,6 +306,7 @@
               <button
                 type="button"
                 class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-black-primary hover:bg-gray-50 group"
+                name="toggle-dropdown"
                 onclick={() => (navbarDropdown = !navbarDropdown)}
               >
                 Languages
