@@ -5,7 +5,7 @@ export const load = async ({}) => {
 
   const postsByLanguage = {};
   posts.forEach((post) => {
-    post.languages.forEach((language) => {
+    post?.languages?.forEach((language) => {
       if (!postsByLanguage[language]) {
         postsByLanguage[language] = [];
       }

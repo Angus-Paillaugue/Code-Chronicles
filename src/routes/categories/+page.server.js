@@ -5,7 +5,7 @@ export const load = async ({}) => {
 
   let postsByCategory = {};
   posts.forEach((post) => {
-    post.categories.forEach((category) => {
+    post?.categories?.forEach((category) => {
       if (!postsByCategory[category]) {
         postsByCategory[category] = [];
       }
