@@ -51,7 +51,7 @@
       article.querySelector('ol:first-child').classList.add('lg:hidden');
       // On scroll, highlight the current section in the side TOC
       onscroll = () => {
-        scrollPos = window.scrollY + 96 + scrollOffset;
+        scrollPos = window.scrollY + 96;
         setTOCPill();
       };
       setScreenRelatedValues();
@@ -136,10 +136,10 @@
       const rect = section.getBoundingClientRect();
       const top = rect.top + window.scrollY;
       // If the section is the active one
-      if (top <= scrollPos) {
+      if (top <= scrollPos + scrollOffset) {
         if (
           (Number(i) < sections.length - 1 &&
-            sections[Number(i) + 1]?.offsetTop > scrollPos) ||
+            sections[Number(i) + 1]?.offsetTop > scrollPos + scrollOffset) ||
           Number(i) === sections.length - 1
         ) {
           // Get the active section link in the side TOC
@@ -244,6 +244,8 @@
   <meta property="twitter:card" content="summary" />
 </svelte:head>
 
+<!-- Scroll activated elements -->
+
 {#if scrollPos > screenHeight}
   <!-- Back To Top Button -->
 
@@ -292,8 +294,8 @@
     <div
       class="bg-black-primary h-full"
       style="width: {articleHeight > 0
-        ? ((scrollPos - screenHeight < 0 ? 0 : scrollPos - screenHeight) /
-            (articleHeight - screenHeight)) *
+        ? ((scrollPos - screenHeight) /
+            (articleHeight + screenHeight - scrollOffset)) *
           100
         : 0}%"
     ></div>
@@ -307,9 +309,9 @@
     scrollPos - screenHeight < 0 ? 0 : scrollPos - screenHeight
   )
     ? sideTOCHidden
-      ? 'lg:translate-x-full mr-12 md:mr-14 lg:mr-16 max-w-[calc(275px+48px)]'
+      ? 'lg:translate-x-full mr-16 max-w-[calc(275px+64px)]'
       : 'lg:translate-x-0 max-w-[275px]'
-    : 'lg:translate-x-full max-w-[calc(275px+48px)]'} max-lg:translate-x-full"
+    : 'lg:translate-x-full max-w-[275px]'} max-lg:translate-x-full"
   bind:this={sideTOC}
   style="direction: ltr;"
 >
