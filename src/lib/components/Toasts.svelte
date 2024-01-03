@@ -55,7 +55,7 @@
         <strong class="block font-medium">{toast.title}</strong>
       </div>
 
-      <p class="mt-2 text-sm">
+      <p class="mt-2 mb-0 text-sm">
         {@html toast.message}
       </p>
       <button

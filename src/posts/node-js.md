@@ -1,7 +1,7 @@
 ---
 title: Node.js API building
 description: The basics about api building using NodeJs and Express.
-banner: https://nodejs.org/static/images/logos/nodejs-new-pantone-black.svg
+banner: /postsAssets/node-js.png
 date: '2023-06-22'
 languages:
   - NodeJS

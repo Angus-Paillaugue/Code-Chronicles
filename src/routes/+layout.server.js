@@ -10,8 +10,10 @@ export async function load() {
     const count = languageCounts.get(language) || 0;
     languageCounts.set(language, count + 1);
   });
+
+  // Sort by count, then alphabetically
   const sortedLanguages = Array.from(languageCounts.entries()).sort(
-    (a, b) => b[1] - a[1]
+    (a, b) => b[1] - a[1] === 0 ? a[0].localeCompare(b[0]) : b[1] - a[1]
   );
   const topLanguages = sortedLanguages.slice(0, 6).map((entry) => entry[0]);
 

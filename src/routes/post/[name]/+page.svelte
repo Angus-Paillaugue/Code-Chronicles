@@ -155,9 +155,6 @@
             sideTOCPillBg.style.top = `${
               activeSectionLink.parentElement.offsetTop - 4
             }px`;
-            // sideTOCPillBg.style.width = `${
-            //   activeSectionLink.parentElement.offsetWidth + 8 * 2
-            // }px`;
             sideTOCPillBg.style.height = `${
               activeSectionLink.offsetHeight + 2 * 5
             }px`;
@@ -174,7 +171,7 @@
                   sideTOC.clientHeight / 2 +
                   activeSectionLink.offsetHeight / 2;
                 clearInterval(interval);
-              }else lastPos = scrollPos;
+              } else lastPos = scrollPos;
             }, 50);
 
             break;
