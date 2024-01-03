@@ -64,22 +64,26 @@
           <p class="mt-2 line-clamp-3 text-base/relaxed text-white/95">
             {post.description}
           </p>
-          <div
-            class="grid gap-2"
-            style="grid-template-columns: repeat(auto-fill, 2.5rem);"
-          >
-            {#each post.languages as language}
-              <div
-                data-tooltip={language}
-                class="tech-stack tooltip-small w-10 h-10"
-                data-flip-id="post-tech-stack-{post.title.split(' ').join('-') +
-                  '-' +
-                  language}"
-              >
-                <LanguageIcon {language} {theme} class="w-full h-full" />
-              </div>
-            {/each}
-          </div>
+          {#if post?.languages}
+            <div
+              class="grid gap-2"
+              style="grid-template-columns: repeat(auto-fill, 2.5rem);"
+            >
+              {#each post.languages as language}
+                <div
+                  data-tooltip={language}
+                  class="tech-stack tooltip-small w-10 h-10"
+                  data-flip-id="post-tech-stack-{post.title
+                    .split(' ')
+                    .join('-') +
+                    '-' +
+                    language}"
+                >
+                  <LanguageIcon {language} {theme} class="w-full h-full" />
+                </div>
+              {/each}
+            </div>
+          {/if}
         </div>
       </a>
     {/each}

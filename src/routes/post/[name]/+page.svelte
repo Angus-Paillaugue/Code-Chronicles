@@ -10,7 +10,7 @@
 
   const { data } = $props();
   const { post } = data;
-  const scrollOffset = 70;
+  const scrollOffset = 200;
   let article = $state();
   let scrollPos = $state(0);
   let articleHeight = $state(0);
@@ -31,14 +31,7 @@
       // Clone the table of contents (TOC) and add it to the side TOC
       const toc = article.querySelector('ol:first-child').cloneNode(true);
       // Add classes to the cloned TOC
-      toc.classList.add(
-        'pl-12',
-        'transition-all',
-        'duration-500',
-        'space-y-2',
-        'list-decimal',
-        'list-inside'
-      );
+      toc.classList.add('side-toc');
       // Add styling to the side TOC items
       toc.querySelectorAll('li').forEach((el) => {
         el.classList.add('m-0', 'w-fit');
@@ -56,6 +49,14 @@
       sideTOC.querySelector('.relative').appendChild(toc);
       // Hide the main TOC greater than small screens
       article.querySelector('ol:first-child').classList.add('lg:hidden');
+      // On scroll, highlight the current section in the side TOC
+      onscroll = () => {
+        scrollPos = window.scrollY + 96 + scrollOffset;
+        setTOCPill();
+      };
+      setScreenRelatedValues();
+      setTOCPill();
+      onresize = setScreenRelatedValues;
     } else {
       // Remove the side TOC if there is no TOC
       sideTOC.remove();
@@ -123,15 +124,6 @@
       };
       el.appendChild(copyButton);
     });
-
-    // On scroll, highlight the current section in the side TOC
-    onscroll = () => {
-      scrollPos = window.scrollY + 96 + scrollOffset;
-      setTOCPill();
-    };
-    setScreenRelatedValues();
-    setTOCPill();
-    onresize = setScreenRelatedValues;
   });
 
   function setTOCPill() {
@@ -163,14 +155,28 @@
             sideTOCPillBg.style.top = `${
               activeSectionLink.parentElement.offsetTop - 4
             }px`;
-            sideTOCPillBg.style.width = `${
-              activeSectionLink.parentElement.offsetWidth + 8 * 2
-            }px`;
+            // sideTOCPillBg.style.width = `${
+            //   activeSectionLink.parentElement.offsetWidth + 8 * 2
+            // }px`;
             sideTOCPillBg.style.height = `${
               activeSectionLink.offsetHeight + 2 * 5
             }px`;
+
             // Replace the URL hash with the current section ID
             replaceState(window.location.href.split('#')[0] + '#' + section.id);
+
+            // Scroll the side TOC to the active section
+            let lastPos = scrollPos;
+            let interval = setInterval(() => {
+              if (lastPos === scrollPos) {
+                sideTOC.scrollTop =
+                  activeSectionLink.parentElement.offsetTop -
+                  sideTOC.clientHeight / 2 +
+                  activeSectionLink.offsetHeight / 2;
+                clearInterval(interval);
+              }else lastPos = scrollPos;
+            }, 50);
+
             break;
           }
         }
@@ -196,10 +202,10 @@
       const toc = sideTOC.querySelector('ol');
       if (sideTOCHidden) {
         toc.classList.add('pl-12');
-        sideTOCPillBg.style.left = `48px`;
+        sideTOCPillBg.style.left = `64px`;
       } else {
         toc.classList.remove('pl-12');
-        sideTOCPillBg.style.left = `-8px`;
+        sideTOCPillBg.style.left = `8px`;
       }
     }
   });
@@ -300,7 +306,7 @@
 <!-- Side Table Of Contents (TOC) -->
 
 <div
-  class="fixed top-1/2 -translate-y-1/2 right-0 z-10 rounded-l-3xl bg-white border border-border border-r-0 p-4 transition-all duration-500 {(
+  class="fixed top-1/2 -translate-y-1/2 right-0 z-10 rounded-l-3xl bg-white border border-border border-r-0 transition-all duration-500 max-h-[500px] overflow-x-hidden overflow-y-auto sideTocContainer {(
     scrollPos - screenHeight < 0 ? 0 : scrollPos - screenHeight
   )
     ? sideTOCHidden
@@ -310,31 +316,33 @@
   bind:this={sideTOC}
   style="direction: ltr;"
 >
-  <button
-    name="toggleTableOfContents"
-    onclick={() => (sideTOCHidden = !sideTOCHidden)}
-    class="w-10 h-10 flex flex-col items-center justify-center bg-neutral-100 hover:bg-neutral-200 transition-all rounded-full mb-2"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class="w-6 h-6 transition-all duration-500 {sideTOCHidden &&
-        'rotate-180'}"
+  <div class="sticky top-0 z-20 bg-white p-2">
+    <button
+      name="toggleTableOfContents"
+      onclick={() => (sideTOCHidden = !sideTOCHidden)}
+      class="w-10 h-10 flex flex-col items-center justify-center bg-neutral-100 hover:bg-neutral-200 transition-all rounded-full"
     >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-      />
-    </svg>
-  </button>
-  <div class="w-full h-full relative">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6 transition-all duration-500 {sideTOCHidden &&
+          'rotate-180'}"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
+        />
+      </svg>
+    </button>
+  </div>
+  <div class="w-full h-full relative p-4 pt-2">
     <!-- Pill background -->
     <span
-      class="absolute -z-10 bg-neutral-200 transition-all ease-linear -left-2 rounded-full"
+      class="absolute -z-10 bg-neutral-200 left-2 right-2 transition-all ease-linear rounded-3xl"
       bind:this={sideTOCPillBg}
     ></span>
   </div>
@@ -367,24 +375,26 @@
         {post.description}
       </p>
 
-      <h5 class="mt-4 text-sm">Tech stack used :</h5>
-      <div
-        class="grid gap-2"
-        style="grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));"
-      >
-        {#each post.languages as language}
-          <a
-            href="/languages/{language}"
-            data-tooltip={language}
-            class="tech-stack"
-            data-flip-id="post-tech-stack-{post.title.split(' ').join('-') +
-              '-' +
-              language}"
-          >
-            <LanguageIcon {language} />
-          </a>
-        {/each}
-      </div>
+      {#if post?.languages}
+        <h5 class="mt-4 text-sm">Tech stack used :</h5>
+        <div
+          class="grid gap-2"
+          style="grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));"
+        >
+          {#each post.languages as language}
+            <a
+              href="/languages/{language}"
+              data-tooltip={language}
+              class="tech-stack"
+              data-flip-id="post-tech-stack-{post.title.split(' ').join('-') +
+                '-' +
+                language}"
+            >
+              <LanguageIcon {language} />
+            </a>
+          {/each}
+        </div>
+      {/if}
     </div>
   </div>
   <article

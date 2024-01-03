@@ -121,7 +121,21 @@ p.article-text:last-child {
 }
 /* TOC */
 li.toc {
-  @apply my-1 font-bold text-lg leading-8 list-inside list-decimal;
+  @apply my-1 font-bold text-base leading-8 list-inside list-decimal;
+}
+ol.side-toc {
+  @apply transition-all duration-500 space-y-2 list-decimal list-inside;
+}
+ol.side-toc li {
+  @apply text-sm;
+}
+.sideTocContainer::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+ol.side-toc ol {
+  @apply space-y-2 list-decimal list-inside mt-2;
 }
 ol:has(li.toc) {
   @apply mb-8;

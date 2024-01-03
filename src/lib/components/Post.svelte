@@ -40,21 +40,23 @@
     <p class="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
       {post.description}
     </p>
-    <div
-      class="grid gap-2"
-      style="grid-template-columns: repeat(auto-fill, 2rem);"
-    >
-      {#each post.languages as language}
-        <div
-          data-tooltip={language}
-          class="tech-stack tooltip-small"
-          data-flip-id="post-tech-stack-{post.title.split(' ').join('-') +
-            '-' +
-            language}"
-        >
-          <LanguageIcon {language} {theme} class="w-8 h-8" />
-        </div>
-      {/each}
-    </div>
+    {#if post?.languages}
+      <div
+        class="grid gap-2"
+        style="grid-template-columns: repeat(auto-fill, 2rem);"
+      >
+        {#each post.languages as language}
+          <div
+            data-tooltip={language}
+            class="tech-stack tooltip-small"
+            data-flip-id="post-tech-stack-{post.title.split(' ').join('-') +
+              '-' +
+              language}"
+          >
+            <LanguageIcon {language} {theme} class="w-8 h-8" />
+          </div>
+        {/each}
+      </div>
+    {/if}
   </div>
 </a>

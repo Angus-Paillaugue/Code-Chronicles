@@ -4,7 +4,7 @@ import { allPosts } from '$lib/server/posts.js';
 export async function load() {
   const posts = await allPosts();
 
-  const allLanguages = posts.flatMap((obj) => obj.languages);
+  const allLanguages = posts.flatMap((obj) => obj?.languages).filter((e) => e);
   const languageCounts = new Map();
   allLanguages.forEach((language) => {
     const count = languageCounts.get(language) || 0;

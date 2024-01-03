@@ -61,8 +61,8 @@ export function postById(id) {
 export function postsByLanguage(language) {
   const posts = allPosts();
   return posts.filter((post) =>
-    post.languages
-      .map((el) => el.toLowerCase())
+    post?.languages
+      ?.map((el) => el.toLowerCase())
       .includes(language.toLowerCase())
   );
 }
@@ -75,8 +75,8 @@ export function postsByLanguage(language) {
 export function postsByCategory(category) {
   const posts = allPosts();
   return posts.filter((post) =>
-    post.categories
-      .map((el) => el.toLowerCase())
+    post?.categories
+      ?.map((el) => el.toLowerCase())
       .includes(category.toLowerCase())
   );
 }
