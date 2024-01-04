@@ -8,7 +8,7 @@ export const load = async ({ params }) => {
   // Isolate the identifier at the end of the URL
   const identifier = urlHealer.identifier.separate(urlName);
   if (!identifier) {
-    throw error(404, 'Post not found');
+    error(404, 'Post not found');
   }
 
   // Fetch the post by its identifier
@@ -19,16 +19,16 @@ export const load = async ({ params }) => {
   // If the identifier is a slug, fetch the post by its slug
   if (!post) {
     post = await postBySlug(identifier.slug);
-    if (!post) throw error(404, 'Post not found');
+    if (!post) error(404, 'Post not found');
   }
 
   // Redirect to the correct URL if the slug is incorrect or is missing the identifier
   const correctUrl = urlHealer.identifier.join(post.slug, post.id);
   if (urlName !== correctUrl)
-    throw redirect(
-      307,
-      `/post/${urlHealer.identifier.join(post.slug, post.id)}`
-    );
+    redirect(
+            307,
+            `/post/${urlHealer.identifier.join(post.slug, post.id)}`
+          );
 
   return {
     post,

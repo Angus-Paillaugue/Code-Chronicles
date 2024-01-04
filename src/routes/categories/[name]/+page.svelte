@@ -35,7 +35,7 @@
 
 <div class="max-w-screen-xl mx-auto w-full p-2 md:p-4 lg:p-6">
   {#if posts.length > 0}
-    <h2>
+    <h2 class="capitalize">
       {$page.params.name}
       posts
     </h2>

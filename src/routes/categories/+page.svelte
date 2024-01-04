@@ -25,7 +25,7 @@
 <div class="max-w-screen-xl mx-auto w-full p-2 md:p-4 lg:p-6">
   {#each Object.entries(posts) as [category, postsInCategory]}
     <div class="pb-2 md:pb-4 lg:pb-6">
-      <h2>
+      <h2 class="capitalize">
         {category}
       </h2>
       <div
