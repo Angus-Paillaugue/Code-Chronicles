@@ -87,25 +87,14 @@ export function postsByCategory(category) {
  * @param {string} str2 - The second string.
  * @returns {boolean} True if the tolerance is within the maximum tolerance, false otherwise.
  */
-function calculateTolerance(str1, str2) {
-  const maxTolerance = 2;
-  const minLength = Math.min(str1.length, str2.length);
-  let tolerance = 0;
-
-  for (let i = 0; i < minLength; i++) {
-    if (str1[i] !== str2[i]) {
-      tolerance++;
-      if (tolerance > maxTolerance) return false;
-    }
-  }
-
-  return true;
+function isMatchingSearch(str1, str2) {
+  return str1.includes(str2) || str2.includes(str1);
 }
 
 /**
  * Searches for posts based on a query.
  * @param {string} query - The search query.
- * @returns {Array | false} An array of post objects that match the search query or false if none are matching.
+ * @returns {Array} An array of post objects that match the search query.
  */
 export function searchPosts(query) {
   const posts = allPosts();
@@ -114,10 +103,10 @@ export function searchPosts(query) {
   return posts.filter((post) => {
     const { title, languages, categories } = post;
     const postTitle = title.toLowerCase();
-
-    if (languages.includes(searchQuery) || categories.includes(searchQuery))
+    
+    if (languages?.includes(searchQuery) || categories?.includes(searchQuery))
       return true;
-    if (calculateTolerance(postTitle, searchQuery)) return true;
+    if (isMatchingSearch(postTitle, searchQuery)) return true;
 
     return false;
   });
