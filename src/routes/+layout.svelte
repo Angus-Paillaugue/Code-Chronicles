@@ -3,7 +3,7 @@
   import { afterNavigate, beforeNavigate } from '$app/navigation';
   import { gsap } from 'gsap/dist/gsap';
   import { Flip } from 'gsap/dist/Flip';
-  import { CookieModal, Footer, NavBar, Toasts } from '$lib/components';
+  import { CookieModal, Footer, NavBar, Toasts, Analytics } from '$lib/components';
   import { page } from '$app/stores';
 
   gsap.registerPlugin(Flip);
@@ -37,6 +37,8 @@
 <Toasts />
 
 <CookieModal />
+
+<Analytics />
 
 <div class="min-h-screen flex flex-col w-full overflow-x-hidden">
   <NavBar />
