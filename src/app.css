@@ -9,25 +9,32 @@
 * {
   @apply scroll-smooth;
 }
+
 html {
   scroll-padding-top: 6rem;
   @apply font-sans;
 }
+
 body {
   @apply font-['Mulish'];
 }
+
 ::-webkit-scrollbar {
   @apply w-2 h-2;
 }
+
 ::-webkit-scrollbar-track {
   @apply bg-neutral-300;
 }
+
 ::-webkit-scrollbar-thumb {
   @apply rounded-full bg-neutral-400;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-neutral-500;
 }
+
 ::selection,
 ::-moz-selection {
   @apply text-white bg-black-primary;
@@ -42,19 +49,24 @@ h5,
 h6 {
   @apply font-['Poppins'] text-wrap-balance;
 }
+
 h1 {
   @apply font-medium md:font-semibold text-3xl md:text-6xl leading-[3.5rem] md:leading-[4rem] mb-4;
 }
+
 h2 {
   @apply font-bold text-lg leading-6 mb-3;
 }
+
 h6 {
   @apply font-semibold text-base leading-5 mb-3;
 }
+
 p,
 li {
   @apply font-['Mulish'] text-lg font-medium leading-6 mb-4 text-wrap-none;
 }
+
 p.balance {
   @apply text-wrap-balance;
 }
@@ -71,17 +83,21 @@ a.link {
 [data-tooltip] {
   @apply cursor-pointer relative inline-block after:content-[attr(data-tooltip)] after:absolute after:shadow-lg after:opacity-0 after:transition-all after:ease-in-out after:pointer-events-none hover:after:opacity-100 after:z-30 focus:after:opacity-100 focus:after:z-30 after:p-3 after:rounded-md after:max-w-[300px] after:break-words after:h-auto after:bg-black-primary dark:after:bg-neutral-700 dark:after:text-white after:text-sm after:leading-4 after:-translate-x-1/2 after:bottom-full after:top-auto after:left-1/2 after:mb-2 after:translate-y-4 hover:after:-translate-y-0 focus:after:-translate-y-0 after:text-white after:font-medium;
 }
+
 .tooltip-small {
   @apply after:p-2 after:rounded after:max-w-[200px] after:text-xs after:leading-3;
 }
+
 /* Left */
 .tooltip-left {
   @apply after:-translate-y-1/2 after:-translate-x-full after:top-1/2 after:bottom-auto hover:after:-left-2 after:right-auto after:mb-0 hover:after:-translate-y-1/2 focus:after:-translate-y-1/2;
 }
+
 /* Bottom */
 .tooltip-bottom {
   @apply after:top-full after:left-1/2 after:bottom-auto after:right-auto after:-translate-y-4 hover:after:translate-y-0 focus:after:translate-y-0 after:mb-0;
 }
+
 /* Right */
 .tooltip-right {
   @apply after:-translate-y-1/2 after:translate-x-1/2 after:top-1/2 after:bottom-auto hover:after:mr-2 after:mr-0 after:right-auto after:mb-0 hover:after:-translate-y-1/2 focus:after:-translate-y-1/2;
@@ -92,51 +108,66 @@ a.link {
 h1.article-heading {
   @apply text-4xl font-bold mb-4;
 }
+
 h2.article-heading {
   @apply text-3xl font-bold mb-4;
 }
+
 h3.article-heading {
   @apply text-2xl font-bold mb-4;
 }
+
 h4.article-heading {
   @apply text-xl font-bold mb-4;
 }
+
 h5.article-heading {
   @apply text-lg font-bold mb-4;
 }
+
 h6.article-heading {
   @apply text-base font-bold mb-4;
 }
+
 p.article-text {
   @apply mb-4 font-normal text-lg leading-8 text-wrap-none;
 }
+
 p.article-text:last-child {
   @apply mb-0;
 }
-p.article-text + .article-heading {
+
+p.article-text+.article-heading {
   @apply mt-10;
 }
+
 p.article-text:last-child {
   @apply mb-0;
 }
+
 /* TOC */
 li.toc {
   @apply my-1 font-bold text-base leading-8 list-inside list-decimal;
 }
+
 ol.side-toc {
   @apply transition-all duration-500 space-y-2 list-decimal list-inside;
 }
+
 ol.side-toc li {
   @apply text-sm;
 }
+
 .sideTocContainer::-webkit-scrollbar {
   display: none;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 ol.side-toc ol {
   @apply space-y-2 list-decimal list-inside mt-2;
 }
+
 ol:has(li.toc) {
   @apply mb-8;
 }
@@ -145,214 +176,56 @@ ol:has(li.toc) {
 kbd {
   @apply font-mono text-sm bg-neutral-300 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-md px-2 py-1;
 }
+
 ul:not(.splide__list) {
   @apply list-image-square list-inside;
 }
 
-/* File name */
-.remark-code-title {
-  @apply text-base font-medium bg-neutral-300 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-t-md px-3 py-1;
-}
-/* Line numbers */
-.line-numbers-wrapper {
-  @apply text-sm md:text-base font-normal text-neutral-500 dark:text-neutral-400 select-none flex flex-col justify-between absolute top-0 leading-[1.5rem] px-2 py-4 left-0 bottom-0 pointer-events-none;
-}
-.copy-code-button {
-  @apply w-10 h-10 bg-black-primary text-white rounded-full flex items-center justify-center absolute transition hover:scale-105 active:scale-90 focus:outline-none right-2 top-2;
-}
+
+
 code {
-  @apply px-1 py-0.5 rounded-md text-base bg-black-primary text-gray-400 font-mono ligatures-normal text-shadow-code;
-}
-code[class*='language-'],
-pre[class*='language-'] {
+  counter-reset: step;
+  counter-increment: step 0;
   direction: ltr;
   -moz-tab-size: 2;
   -o-tab-size: 2;
   tab-size: 2;
-  @apply bg-neutral-800 text-gray-400 text-shadow-code font-mono ligatures-normal hyphens-none whitespace-pre-wrap text-left text-wrap p-0 text-sm md:text-base leading-6 max-md:whitespace-pre max-md:overflow-x-auto relative;
+  @apply text-shadow-code ligatures-normal hyphens-none whitespace-pre-wrap;
 }
 
-/* Add styling to code blocks */
-pre[class*='language-'] {
-  @apply p-4 rounded-lg mb-4;
+.shiki {
+  @apply rounded-md relative mb-4 py-2 pr-14;
 }
-code[class*='language-']::-moz-selection,
-pre[class*='language-']::-moz-selection,
-code[class*='language-'] ::-moz-selection,
-pre[class*='language-'] ::-moz-selection,
-code[class*='language-']::selection,
-pre[class*='language-']::selection,
-code[class*='language-'] ::selection,
-pre[class*='language-'] ::selection {
-  @apply text-shadow-none;
+
+/* For highlighted lines */
+/* .highlighted {
+  display: inline-block;
+  background-color: var(--colour-code-background-highlighted);
+  width: calc(var(--max-width-full) + var(--spacing-4));
+  border-left: var(--spacing-1) solid var(--colour-code-line-highlight);
+  margin-left: calc(-1 * var(--spacing-1));
+} */
+
+code .line::before {
+  content: counter(step);
+  counter-increment: step;
+  font-variant-numeric: tabular-nums;
+  @apply inline-block text-right mr-2 text-neutral-500 dark:text-neutral-400 w-6
 }
-/* Add or remove rounded to code blocks depending
-   of if they have a title or not
-*/
-:not(pre) > code[class*='language-'] {
-  @apply rounded-lg p-4 whitespace-normal;
+
+/* File name */
+.remark-code-title {
+  @apply text-base font-medium bg-neutral-300 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-t-md px-3 py-1 flex flex-row gap-4 items-center;
 }
-.remark-code-title + pre[class*='language-'] {
+.remark-code-title ~ .shiki {
   @apply rounded-t-none;
 }
-/* Printing page */
-@media print {
-  code[class*='language-'],
-  pre[class*='language-'] {
-    @apply text-shadow-none;
-  }
+
+.copy-code-button {
+  @apply max-h-[2.5rem] bg-black-primary text-white rounded-full flex items-center justify-center absolute transition hover:scale-105 active:scale-90 focus:outline-none right-1 top-1 bottom-1 p-1 aspect-square;
 }
 
-/* Code tokens */
-.token.comment,
-.token.prolog,
-.token.cdata {
-  color: hsl(220, 10%, 40%);
-}
-
-.token.doctype,
-.token.punctuation,
-.token.entity {
-  color: hsl(220, 14%, 71%);
-}
-
-.token.attr-name,
-.token.class-name,
-.token.boolean,
-.token.constant,
-.token.number,
-.token.atrule {
-  color: hsl(29, 54%, 61%);
-}
-
-.token.keyword {
-  color: hsl(286, 60%, 67%);
-}
-
-.token.property,
-.token.tag,
-.token.symbol,
-.token.deleted,
-.token.important {
-  color: hsl(355, 65%, 65%);
-}
-
-.token.selector,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted,
-.token.regex,
-.token.attr-value,
-.token.attr-value > .token.punctuation {
-  color: hsl(95, 38%, 62%);
-}
-
-.token.variable,
-.token.operator,
-.token.function {
-  color: hsl(207, 82%, 66%);
-}
-
-.token.url {
-  color: hsl(187, 47%, 55%);
-}
-
-.token.attr-value > .token.punctuation.attr-equals,
-.token.special-attr > .token.attr-value > .token.value.css {
-  color: hsl(220, 14%, 71%);
-}
-
-.language-css .token.selector {
-  color: hsl(355, 65%, 65%);
-}
-
-.language-css .token.property {
-  color: hsl(220, 14%, 71%);
-}
-
-.language-css .token.function,
-.language-css .token.url > .token.function {
-  color: hsl(187, 47%, 55%);
-}
-
-.language-css .token.url > .token.string.url {
-  color: hsl(95, 38%, 62%);
-}
-
-.language-css .token.important,
-.language-css .token.atrule .token.rule {
-  color: hsl(286, 60%, 67%);
-}
-
-.language-javascript .token.operator {
-  color: hsl(286, 60%, 67%);
-}
-
-.language-javascript
-  .token.template-string
-  > .token.interpolation
-  > .token.interpolation-punctuation.punctuation {
-  color: hsl(5, 48%, 51%);
-}
-
-.language-json .token.operator {
-  color: hsl(220, 14%, 71%);
-}
-
-.language-json .token.null.keyword {
-  color: hsl(29, 54%, 61%);
-}
-
-.language-markdown .token.url,
-.language-markdown .token.url > .token.operator,
-.language-markdown .token.url-reference.url > .token.string {
-  color: hsl(220, 14%, 71%);
-}
-
-.language-markdown .token.url > .token.content {
-  color: hsl(207, 82%, 66%);
-}
-
-.language-markdown .token.url > .token.url,
-.language-markdown .token.url-reference.url {
-  color: hsl(187, 47%, 55%);
-}
-
-.language-markdown .token.blockquote.punctuation,
-.language-markdown .token.hr.punctuation {
-  color: hsl(220, 10%, 40%);
-  font-style: italic;
-}
-
-.language-markdown .token.code-snippet {
-  color: hsl(95, 38%, 62%);
-}
-
-.language-markdown .token.bold .token.content {
-  color: hsl(29, 54%, 61%);
-}
-
-.language-markdown .token.italic .token.content {
-  color: hsl(286, 60%, 67%);
-}
-
-.language-markdown .token.strike .token.content,
-.language-markdown .token.strike .token.punctuation,
-.language-markdown .token.list.punctuation,
-.language-markdown .token.title.important > .token.punctuation {
-  color: hsl(355, 65%, 65%);
-}
-.token.bold {
-  @apply font-bold;
-}
-.token.comment,
-.token.italic {
-  font-style: italic;
-}
-.token.entity {
-  @apply cursor-help;
-}
-.token.namespace {
-  @apply opacity-80;
+/* ! Same bg color as the code blocks (set by the theme in `mdsvex.config.js`) */
+code:not(pre code) {
+  @apply rounded-md bg-[#282c34] text-gray-300 px-1 py-0.5 text-base;
 }

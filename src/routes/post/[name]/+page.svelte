@@ -5,7 +5,7 @@
   import { replaceState } from '$app/navigation';
   import { fly } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
-  import LanguageIcon from '$lib/components/LanguageIcon.svelte';
+  import { LanguageIcon } from '$lib/components/';
   import { page } from '$app/stores';
 
   const { data } = $props();
@@ -77,28 +77,44 @@
     tocLine.forEach((el) => {
       el.classList.add('toc');
     });
+    // Add MacOs buttons to the code block title
+    const codeBlockTitles = article.querySelectorAll('.remark-code-title');
+    codeBlockTitles.forEach((el) => {
+      const buttonContainers = document.createElement('div');
+      buttonContainers.innerHTML = `
+        <div class="w-4 h-4 rounded-full bg-[#fd5754] text-[#9b1f2a] border border-[#d52735] group flex flex-col items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 23 24" stroke-width="3" stroke="currentColor" class="w-3 h-3 transition-all group-hover:opacity-100 opacity-0">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>  
+        </div>
+        <div class="w-4 h-4 rounded-full bg-[#34c848] text-[#077908] border border-[#13c11e] group flex flex-col items-center justify-center">
+          <svg version="1.0" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 transition-all group-hover:opacity-100 opacity-0" viewBox="10 10 320 320" preserveAspectRatio="xMidYMid meet">
+            <g transform="translate(0,357) scale(0.1,-0.1)"
+            fill="currentColor" stroke="none">
+              <path d="M1995 2010 l690 -690 3 112 c1 62 1 327 0 588 l-3 475 -27 51 c-31 59 -73 98 -138 128 -44 20 -61 21 -630 24 l-585 3 690 -691z"/>
+              <path d="M890 1674 l0 -590 26 -52 c14 -29 44 -68 66 -87 78 -66 69 -65 711 -63 l577 3 -690 690 -690 690 0 -591z"/>
+            </g>
+          </svg>  
+        </div>
+        <div class="w-4 h-4 rounded-full bg-[#febb40] text-[#995817] border border-[#da9e10] group flex flex-col items-center justify-center">
+          <svg version="1.0" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 transition-all group-hover:opacity-100 opacity-0" viewBox="10 10 320 320" preserveAspectRatio="xMidYMid meet">
+            <g transform="translate(0,357) scale(0.1,-0.1)"
+            fill="currentColor" stroke="none">
+              <path d="M684 1920 c-27 -11 -72 -65 -80 -96 -9 -36 2 -94 24 -123 10 -13 33 -32 52 -42 33 -18 82 -19 1103 -19 966 0 1072 2 1103 16 92 44 109 167 33 240 l-30 29 -1092 2 c-601 1 -1101 -2 -1113 -7z"/>
+            </g>
+          </svg>
+        </div>
+      `;
+      buttonContainers.classList.add('flex', 'flex-row', 'gap-1');
+      el.prepend(buttonContainers);
+    });
 
     // Code blocks
     const code = article.querySelectorAll('pre');
     code.forEach((el) => {
-      // Creating line number column
-      const lineNumberWrapper = document.createElement('div');
-      lineNumberWrapper.classList.add('line-numbers-wrapper');
-      // Calculating number of lines based on code block height and padding
-      const noOfLines = Math.ceil((el.clientHeight - 48) / 24);
-      // Creating line number elements and appending them to the line number column
-      for (let i = 1; i <= noOfLines; i++) {
-        const line = document.createElement('span');
-        line.innerText = i;
-        lineNumberWrapper.appendChild(line);
-      }
-      el.appendChild(lineNumberWrapper);
-      // Adding padding to the code block to accommodate the line number column width
-      el.style.paddingLeft = `${12 + 12 * noOfLines.toString().length}px`;
-
       // Creating copy code button
       const copyButton = document.createElement('button');
-      copyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 copy"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" /></svg><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 copied hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>`;
+      copyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="max-w-[1.5rem] max-h-[1.5rem] h-full w-full copy"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" /></svg><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 copied hidden"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>`;
       copyButton.classList.add('copy-code-button');
       copyButton.name = 'copy-code';
 
@@ -396,6 +412,7 @@
       {/if}
     </div>
   </div>
+
   <article
     class="p-4 border border-border overflow-hidden rounded-3xl"
     bind:this={article}
