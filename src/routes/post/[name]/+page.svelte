@@ -5,7 +5,7 @@
   import { replaceState } from '$app/navigation';
   import { fly } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
-  import { LanguageIcon } from '$lib/components/';
+  import { LanguageIcon } from '$lib/components';
   import { page } from '$app/stores';
 
   const { data } = $props();
@@ -82,21 +82,21 @@
     codeBlockTitles.forEach((el) => {
       const buttonContainers = document.createElement('div');
       buttonContainers.innerHTML = `
-        <div class="w-4 h-4 rounded-full bg-[#fd5754] text-[#9b1f2a] border border-[#d52735] group flex flex-col items-center justify-center">
+        <div class="w-4 h-4 rounded-full bg-[#fd5754] text-white border border-[#d52735] group flex flex-col items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 23 24" stroke-width="3" stroke="currentColor" class="w-3 h-3 transition-all group-hover:opacity-100 opacity-0">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-          </svg>  
+          </svg>
         </div>
-        <div class="w-4 h-4 rounded-full bg-[#34c848] text-[#077908] border border-[#13c11e] group flex flex-col items-center justify-center">
+        <div class="w-4 h-4 rounded-full bg-[#34c848] text-white border border-[#13c11e] group flex flex-col items-center justify-center">
           <svg version="1.0" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 transition-all group-hover:opacity-100 opacity-0" viewBox="10 10 320 320" preserveAspectRatio="xMidYMid meet">
             <g transform="translate(0,357) scale(0.1,-0.1)"
             fill="currentColor" stroke="none">
               <path d="M1995 2010 l690 -690 3 112 c1 62 1 327 0 588 l-3 475 -27 51 c-31 59 -73 98 -138 128 -44 20 -61 21 -630 24 l-585 3 690 -691z"/>
               <path d="M890 1674 l0 -590 26 -52 c14 -29 44 -68 66 -87 78 -66 69 -65 711 -63 l577 3 -690 690 -690 690 0 -591z"/>
             </g>
-          </svg>  
+          </svg>
         </div>
-        <div class="w-4 h-4 rounded-full bg-[#febb40] text-[#995817] border border-[#da9e10] group flex flex-col items-center justify-center">
+        <div class="w-4 h-4 rounded-full bg-[#febb40] text-white border border-[#da9e10] group flex flex-col items-center justify-center">
           <svg version="1.0" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 transition-all group-hover:opacity-100 opacity-0" viewBox="10 10 320 320" preserveAspectRatio="xMidYMid meet">
             <g transform="translate(0,357) scale(0.1,-0.1)"
             fill="currentColor" stroke="none">
